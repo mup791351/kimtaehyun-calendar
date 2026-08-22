@@ -1470,16 +1470,8 @@ useEffect(() => {
   }))
   .filter((event) => event.date);
 
-      if (firebaseEvents.length > 0) {
-  setEvents((prev) => {
-    const existingIds = new Set(prev.map((event) => event.id));
-
-    const newEvents = firebaseEvents.filter(
-      (event) => !existingIds.has(event.id)
-    );
-
-    return [...prev, ...newEvents];
-  });
+     if (firebaseEvents.length > 0) {
+  setEvents(firebaseEvents);
 }
     } catch (error) {
       console.error("Firebase 일정 불러오기 오류:", error);
