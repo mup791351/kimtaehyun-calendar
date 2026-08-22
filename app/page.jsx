@@ -812,7 +812,7 @@ function Legend({ catKey, cat, isActive, onClick }) {
       onClick={() => onClick(catKey)}
       className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${
         isActive
-          ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 sm:scale-105`
+          ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105`
           : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
       }`}
     >
@@ -1083,12 +1083,12 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           <p className="text-[10px] font-bold text-neutral-400 text-center uppercase tracking-wider mb-2">
             카테고리 필터
           </p>
-          <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none justify-start sm:justify-center">
+          <div className="flex gap-1.5 overflow-x-auto py-2 scrollbar-none justify-start sm:justify-center">
             <button
               onClick={() => onCategoryChange("all")}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${
                 activeCategory === "all"
-                  ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 sm:scale-105"
+                  ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
               }`}
             >
