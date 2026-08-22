@@ -1008,7 +1008,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
           {days.map((day) => {
             const dayEvents = eventsByDay[day] || [];
-            const iconSize = dayEvents.length >= 3 ? "w-4 h-4" : "w-5 h-5";
+
             const hasEvents = dayEvents.length > 0;
             const isToday = currentYear === year && currentMonth === month && currentDay === day;
             const isPast = new Date(year, month, day) < new Date(currentYear, currentMonth, currentDay);
@@ -1049,10 +1049,10 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
   return (
     <span
-      key={index}
-      title={evt.title}
-      
-    >className={`${iconSize} flex-shrink-0 flex items-center justify-center`}
+  key={index}
+  title={evt.title}
+  className="w-5 h-5 flex-shrink-0 flex items-center justify-center"
+>
       {icon.startsWith("/") ? (
         <img
           src={icon}
