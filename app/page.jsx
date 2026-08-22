@@ -817,11 +817,7 @@ function Legend({ catKey, cat, isActive, onClick }) {
       }`}
     >
       {catKey === "etc" ? (
-  <span
-  className={`${
-    dayEvents.length >= 3 ? "text-xs" : "text-sm"
-  } leading-none`}
->
+ <span className="text-xs leading-none">
   🎸
 </span>
 ) : (
@@ -1039,41 +1035,41 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
                   <div className="flex flex-wrap justify-center gap-0 mb-0.5">
   {dayEvents.map((evt, index) => {
-    const iconMap = {
-      seoul: "/icons/seococl.png",
-      meta: "/icons/metacocl.png",
-      samgak: "/icons/samgakjidae.png",
-      solo: "/icons/taehyun.png",
-      etc: "🎸",
-    };
+  const iconMap = {
+    seoul: "/icons/seococl.png",
+    meta: "/icons/metacocl.png",
+    samgak: "/icons/samgakjidae.png",
+    solo: "/icons/taehyun.png",
+    etc: "🎸",
+  };
 
-    const icon = iconMap[evt.category] || "🎸";
+  const icon = iconMap[evt.category] || "🎸";
 
-    return (
-      <span
-        key={index}
-        title={evt.title}
-        className={`${
-  dayEvents.length >= 3 ? "w-4 h-4" : "w-5 h-5"
-} flex-shrink-0`}
-      >
-        {icon.startsWith("/") ? (
-          <img
-            src={icon}
-            alt=""
-            className={`w-full h-full object-contain ${
-  evt.category === "solo"
-    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-    : ""
-}`}
-          />
-        ) : (
-          <span className="text-base leading-none">{icon}</span>
-        
-        )}
-      </span>
-    );
-  })}
+
+  return (
+    <span
+      key={index}
+      title={evt.title}
+      className="w-5 h-5 flex-shrink-0 flex items-center justify-center [&:nth-child(3)]:w-4 [&:nth-child(3)]:h-4 [&:nth-child(n+4)]:w-4 [&:nth-child(n+4)]:h-4"
+    >
+      {icon.startsWith("/") ? (
+        <img
+          src={icon}
+          alt=""
+          className={`w-full h-full object-contain ${
+            evt.category === "solo"
+              ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+              : ""
+          }`}
+        />
+      ) : (
+  <span className="text-xs leading-none">
+  {icon}
+</span>
+)}
+    </span>
+  );
+})}
 </div>
                 </button>
               </div>
