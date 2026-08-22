@@ -70,15 +70,7 @@ const MailIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
   </svg>
-);
-
-const MoonIcon = ({ className = "w-4 h-4" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-  </svg>
-);
-
-const SunIcon = ({ className = "w-4 h-4" }) => (
+);const SunIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
@@ -115,11 +107,35 @@ const VENUES = {
 };
 
 const CATEGORY_COLORS = {
-  solo: { label: "단독쇼", color: "bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-neutral-950 font-black animate-pulse shadow-lg shadow-amber-400/50 border border-yellow-200" },
-  seoul: { label: "서울코미디클럽", color: "bg-blue-600" },
-  meta: { label: "메타코미디클럽", color: "bg-orange-500" },
-  samgak: { label: "삼각지대", color: "bg-emerald-600" },
-  etc: { label: "기타", color: "bg-purple-600" }
+  solo: {
+    label: "단독쇼",
+    color: "bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-neutral-950 font-black animate-pulse shadow-lg shadow-amber-400/50 border border-yellow-200",
+    icon: "/icons/taehyun.png",
+  },
+
+  seoul: {
+    label: "서울코미디클럽",
+    color: "bg-blue-600",
+    icon: "/icons/seococl.png",
+  },
+
+  meta: {
+    label: "메타코미디클럽",
+    color: "bg-orange-500",
+    icon: "/icons/metacocl.png",
+  },
+
+  samgak: {
+    label: "삼각지대",
+    color: "bg-emerald-600",
+    icon: "/icons/samgakjidae.png",
+  },
+
+  etc: {
+    label: "기타",
+    color: "bg-purple-600",
+    icon: "🎸",
+  },
 };
 
 const INITIAL_EVENTS = [
@@ -527,26 +543,12 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
   }, []);
   return (
     <>
-      <header className="flex flex-col items-center text-center pt-4 relative">
-        <div className="absolute top-0 right-0 flex items-center gap-1.5">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-2.5 text-neutral-700 dark:text-neutral-200 shadow-sm active:scale-95"
-            title="다크모드 토글"
-          >
-            {darkMode ? <SunIcon className="w-4 h-4 text-amber-400" /> : <MoonIcon className="w-4 h-4 text-neutral-700" />}
-          </button>
+      <header className="flex flex-col items-center text-center pt-0 relative">
+          
 
-          <button
-            onClick={onShare}
-            className="flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-2 text-xs font-bold text-neutral-700 dark:text-neutral-200 shadow-sm active:scale-95"
-          >
-            <ShareIcon className="w-3.5 h-3.5" /> 공유
-          </button>
-        </div>
 
         {/* Profile Image - Slim horizontal layout with 4-side gradient fade */}
-        <div className="w-full max-w-xs mb-2 mt-6 px-4">
+        <div className="w-full max-w-xs mb-2 mt-0 px-4">
           <div 
             className="w-full h-32 sm:h-40 relative overflow-hidden flex items-center justify-center"
             style={{
@@ -586,7 +588,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
             href="https://www.instagram.com/choo_sen?igsh=MWRsbXQydXFncmI2"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 shadow-sm active:scale-95 text-neutral-800 dark:text-neutral-200 text-xs font-semibold"
+            className="flex items-center gap-1.5 rounded-full border border-neutral-700 bg-[#151515] px-4 py-2 shadow-sm active:scale-95 text-neutral-200 text-xs font-semibold"
           >
             <Instagram className="w-3.5 h-3.5 text-pink-500" />
             <span>Instagram</span>
@@ -596,7 +598,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
             href="https://www.youtube.com/channel/UC67dXWw4xqqQQDzg5bWyObA?si=kB5Xmp2MeeuVJHIL"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 shadow-sm active:scale-95 text-neutral-800 dark:text-neutral-200 text-xs font-semibold"
+            className="flex items-center gap-1.5 rounded-full border border-neutral-700 bg-[#151515] px-4 py-2 shadow-sm active:scale-95 text-neutral-200 text-xs font-semibold"
           >
             <Youtube className="w-3.5 h-3.5 text-red-500" />
             <span>YouTube</span>
@@ -605,20 +607,20 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
       </header>
 
       {nextShow && (
-        <div className="mt-4 mb-3 rounded-2xl bg-gradient-to-r from-orange-50 via-white to-amber-50 dark:from-neutral-800 dark:via-neutral-800 dark:to-neutral-900 border border-orange-200 dark:border-neutral-700 p-4 flex justify-between items-center shadow-sm">
+        <div className="mt-4 mb-3 rounded-2xl bg-[#1c1c1c] border-2 border-red-900/70 p-4 flex justify-between items-center shadow-lg shadow-red-900/10">
           <div className="space-y-1 pr-2">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <p className="text-[11px] font-extrabold text-orange-600 dark:text-orange-400 flex items-center gap-1 uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-orange-500 animate-pulse" /> NEXT SHOW
+              <p className="text-[11px] font-extrabold text-red-400 flex items-center gap-1 uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-red-500 animate-pulse" /> NEXT SHOW
               </p>
               {mounted && getDdayText(nextShow.date) && (
-                <span className="bg-orange-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+                <span className="bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
                   {getDdayText(nextShow.date)}
                 </span>
               )}
             </div>
 
-            <h2 className="text-lg sm:text-xl font-black text-neutral-900 dark:text-white">
+            <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">
   {nextShow.date.split('-')[1]}월 {nextShow.date.split('-')[2]}일 {nextShow.startTime}
 </h2>
             <p className="text-neutral-600 dark:text-neutral-300 text-xs font-semibold flex items-center gap-1 flex-wrap">
@@ -632,7 +634,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
                 href={nextShow.booking}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold transition shadow-sm block text-center"
+                className="px-3.5 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-black transition shadow-lg shadow-red-600/30 block text-center animate-pulse"
               >
                 🎟 예매
               </a>
@@ -653,11 +655,23 @@ function VenueInfoCards() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* 서울코미디클럽 */}
-        <div className="p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm space-y-2">
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-blue-600">
-            서울코미디클럽
-          </span>
-          <h4 className="font-black text-sm text-neutral-900 dark:text-white">서울코미디클럽 올스타즈 라이브</h4>
+        <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
+          <div className="flex items-center gap-3">
+  <img
+    src="/icons/seococl.png"
+    alt="서울코미디클럽"
+    className="w-10 h-10 object-contain"
+  />
+  <div>
+    <span className="text-[10px] font-bold text-blue-400">
+      서울코미디클럽
+    </span>
+    <h4 className="font-black text-sm text-white">
+      서울코미디클럽 올스타즈
+    </h4>
+  </div>
+</div>
+        
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 종로구 대학로8가길 64 김동진빌딩 지하1층</p>
           <div className="flex gap-2 pt-1">
             <a 
@@ -680,11 +694,23 @@ function VenueInfoCards() {
         </div>
 
         {/* 메타코미디클럽 홍대 */}
-        <div className="p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm space-y-2">
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-orange-500">
-            메타코미디클럽
-          </span>
-          <h4 className="font-black text-sm text-neutral-900 dark:text-white">메타코미디클럽 홍대</h4>
+        <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
+          <div className="flex items-center gap-3">
+  <img
+    src="/icons/metacocl.png"
+    alt="메타코미디클럽"
+    className="w-10 h-10 object-contain"
+  />
+  <div>
+    <span className="text-[10px] font-bold text-orange-400">
+      메타코미디클럽
+    </span>
+    <h4 className="font-black text-sm text-white">
+      메타코미디클럽 홍대
+    </h4>
+  </div>
+</div>
+          
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 마포구 와우산로 76-1 2층</p>
           <div className="flex gap-2 pt-1">
             <a 
@@ -707,11 +733,22 @@ function VenueInfoCards() {
         </div>
 
         {/* 삼각지대 */}
-        <div className="p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm space-y-2">
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-emerald-600">
-            삼각지대
-          </span>
-          <h4 className="font-black text-sm text-neutral-900 dark:text-white">삼각지대 오픈마이크 & 쇼케이스</h4>
+        <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
+          <div className="flex items-center gap-3">
+  <img
+    src="/icons/samgakjidae.png"
+    alt="삼각지대"
+    className="w-10 h-10 object-contain"
+  />
+  <div>
+    <span className="text-[10px] font-bold text-emerald-400">
+      삼각지대
+    </span>
+    <h4 className="font-black text-sm text-white">
+      삼각지대 오픈마이크 & 쇼케이스
+    </h4>
+  </div>
+</div>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 용산구 한강대로48길 17-6 펀타스틱 씨어터</p>
           <div className="flex gap-2 pt-1">
             <a 
@@ -734,11 +771,24 @@ function VenueInfoCards() {
         </div>
 
         {/* 미국식 농담 */}
-        <div className="p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm space-y-2">
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-red-600">
-            미국식농담
-          </span>
-          <h4 className="font-black text-sm text-neutral-900 dark:text-white">매주 목금 유튜브 업로드</h4>
+        <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
+          <div className="flex items-center gap-3">
+  <div className="w-10 h-10 flex items-center justify-center">
+  <img
+    src="/icons/us.png"
+    alt="미국 국기"
+    className="w-8 h-8 object-contain"
+  />
+</div>
+  <div>
+    <span className="text-[10px] font-bold text-red-400">
+      미국식농담
+    </span>
+    <h4 className="font-black text-sm text-white">
+      매주 목금 유튜브 업로드
+    </h4>
+  </div>
+</div>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준 등 최고의 만담 콘텐츠.</p>
           <div className="pt-1">
             <a 
@@ -766,7 +816,19 @@ function Legend({ catKey, cat, isActive, onClick }) {
           : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
       }`}
     >
-      <span className={`w-2 h-2 rounded-full ${isActive && catKey !== 'solo' ? "bg-white" : cat.color}`} />
+      {catKey === "etc" ? (
+  <span className="text-sm leading-none">🎸</span>
+) : (
+  <img
+  src={cat.icon}
+  alt=""
+  className={`w-5 h-5 object-contain ${
+    catKey === "solo"
+      ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+      : ""
+  }`}
+/>
+)}
       <span>{cat.label}</span>
     </button>
   );
@@ -910,11 +972,11 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
   return (
     <>
-      <section id="calendar" className="rounded-2xl bg-white dark:bg-neutral-800 p-3 sm:p-5 shadow-sm border border-neutral-200 dark:border-neutral-700 my-3 overflow-hidden">
+      <section id="calendar" className="rounded-2xl bg-[#111111] p-3 sm:p-5 shadow-sm border border-neutral-800 my-3 overflow-hidden">
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={handlePrevMonth}
-            className="w-7 h-7 rounded-full border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-600 dark:text-neutral-300 font-black text-sm active:bg-neutral-100"
+            className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800"
           >
             ‹
           </button>
@@ -923,7 +985,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           </div>
           <button
             onClick={handleNextMonth}
-            className="w-7 h-7 rounded-full border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-600 dark:text-neutral-300 font-black text-sm active:bg-neutral-100"
+            className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800"
           >
             ›
           </button>
@@ -954,33 +1016,57 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
                   onClick={() => handleDayClick(day)}
                   className={`w-full h-16 sm:h-20 rounded-xl p-1 flex flex-col justify-between transition-all text-left border overflow-hidden ${
                     hasEvents
-                      ? "bg-neutral-50 dark:bg-neutral-700/60 border-neutral-200 dark:border-neutral-600 active:border-orange-400 shadow-sm"
-                      : "border-transparent active:bg-neutral-50 dark:active:bg-neutral-700/30"
+  ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
+  : "border-transparent active:bg-[#151515]"
                   } ${isToday ? "ring-2 ring-black dark:ring-white bg-orange-50/60 dark:bg-orange-950/30" : ""}`}
                 >
                   <div className="flex flex-col w-full">
-                    <span className={`font-black text-xs leading-none ${isToday ? "text-orange-600 dark:text-orange-400 font-extrabold" : isPast ? "text-neutral-400 dark:text-neutral-500 font-normal" : hasEvents ? "text-neutral-900 dark:text-white" : "text-neutral-400"}`}>
+<span className={`font-black text-xs leading-none ${isToday ? "text-red-500 font-extrabold" : isPast ? "text-neutral-600 font-normal" : hasEvents ? "text-white" : "text-neutral-500"}`}>
                       {day}
                     </span>
                     {isToday && (
-                      <span className="text-[7px] font-black text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-950 px-1 py-0.5 rounded font-sans tracking-tighter w-max mt-0.5 scale-90 origin-left">
-                        TODAY
-                      </span>
+                      <span className="text-[7px] font-black text-red-400 bg-red-950 px-1 py-0.5 rounded font-sans tracking-tighter w-max mt-0.5 scale-90 origin-left">
+  TODAY
+</span>
                     )}
                   </div>
 
-                  <div className="flex flex-wrap justify-center gap-0.5 mb-0.5">
-                    {dayEvents.map((evt, index) => {
-                      const cat = CATEGORY_COLORS[evt.category] || CATEGORY_COLORS.etc;
-                      return (
-                        <span
-                          key={index}
-                          title={evt.title}
-                          className={`w-1.5 h-1.5 rounded-full ${cat.color}`}
-                        />
-                      );
-                    })}
-                  </div>
+                  <div className="flex flex-wrap justify-center gap-0 mb-0.5">
+  {dayEvents.map((evt, index) => {
+    const iconMap = {
+      seoul: "/icons/seococl.png",
+      meta: "/icons/metacocl.png",
+      samgak: "/icons/samgakjidae.png",
+      solo: "/icons/taehyun.png",
+      etc: "🎸",
+    };
+
+    const icon = iconMap[evt.category] || "🎸";
+
+    return (
+      <span
+        key={index}
+        title={evt.title}
+        className="w-5 h-5 flex-shrink-0"
+      >
+        {icon.startsWith("/") ? (
+          <img
+            src={icon}
+            alt=""
+            className={`w-full h-full object-contain ${
+  evt.category === "solo"
+    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+    : ""
+}`}
+          />
+        ) : (
+          <span className="text-base leading-none">{icon}</span>
+        
+        )}
+      </span>
+    );
+  })}
+</div>
                 </button>
               </div>
             );
@@ -1625,8 +1711,8 @@ useEffect(() => {
   }, [sortedEvents, pinnedEventId]);
 
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
-      <div className="min-h-screen bg-white dark:bg-neutral-950 font-sans text-neutral-900 dark:text-neutral-100 antialiased py-3 px-3 relative transition-colors duration-300 flex flex-col justify-between">
+    <div className="dark">
+      <div className="min-h-screen bg-[#080808] text-white font-sans antialiased py-3 px-3 relative flex flex-col justify-between">
         {toastMessage && (
           <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-neutral-900 dark:bg-white dark:text-neutral-900 text-white px-4 py-2.5 rounded-2xl shadow-xl text-xs font-bold animate-bounce">
             {toastMessage}
