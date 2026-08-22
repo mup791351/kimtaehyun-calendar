@@ -817,7 +817,13 @@ function Legend({ catKey, cat, isActive, onClick }) {
       }`}
     >
       {catKey === "etc" ? (
-  <span className="text-sm leading-none">🎸</span>
+  <span
+  className={`${
+    dayEvents.length >= 3 ? "text-xs" : "text-sm"
+  } leading-none`}
+>
+  🎸
+</span>
 ) : (
   <img
   src={cat.icon}
@@ -1047,7 +1053,9 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
       <span
         key={index}
         title={evt.title}
-        className="w-5 h-5 flex-shrink-0"
+        className={`${
+  dayEvents.length >= 3 ? "w-4 h-4" : "w-5 h-5"
+} flex-shrink-0`}
       >
         {icon.startsWith("/") ? (
           <img
