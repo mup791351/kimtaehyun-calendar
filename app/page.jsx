@@ -103,6 +103,19 @@ const VENUES = {
     address: "서울 용산구 한강대로48길 17-6 펀타스틱 씨어터",
     instagram: "https://www.instagram.com/comedy_samgakjidae?igsh=MXdnbDE2dG1mcG11dQ==",
     booking: "https://docs.google.com/forms/d/e/1FAIpQLSfGHLErwl5c7N2qSkrenXqVm0OV1HXRKuhZ3wb1xxOSO06Osw/viewform"
+  },
+    gangnam: {
+    name: "스타이즈본라운지",
+    address: "서울 서초구 서초대로 75길 36 지하1층 101호",
+    instagram: "https://www.instagram.com/starisbornseoul/",
+    booking: "https://booking.naver.com/booking/5/bizes/1696245?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAae-SD8Mz5Rfjc9ClWYRm4iQY1MovPKiv-mohaDOl_Wbe-sfo0P8Z_EF2tPZng_aem_qln5jGGUkhlykYzEP4MD_Q"
+  },
+
+  namgeukjang: {
+    name: "남극장",
+    address: "서울 관악구 봉천동 1626-42 4층/루프탑",
+    instagram: "https://www.instagram.com/standupcomedyclub_kr/",
+    booking: "https://m.booking.naver.com/booking/6/bizes/1601050/items/7844800?area=ple&lang=ko&startDate=2026-08-03&theme=place"
   }
 };
 
@@ -502,7 +515,259 @@ const INITIAL_EVENTS = [
     price: 33000,
     booking: "https://booking.naver.com/booking/12/bizes/627353/items/5020472",
     description: "유튜브 [미국식농담] 오프라인 확장판! 생생한 라이브로 만나는 특별 온스테이지."
-  }
+  },
+  {
+  id: "sep-2",
+  date: "2026-09-02",
+  day: 2,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-3",
+  date: "2026-09-03",
+  day: 3,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 스탠드업어셈블",
+  startTime: "20:00",
+  price: 33000,
+},
+
+{
+  id: "sep-4",
+  date: "2026-09-04",
+  day: 4,
+  category: "etc",
+  venueKey: "gangnam",
+  title: "강남코미디라운지",
+  startTime: "20:00",
+  price: 33000,
+},
+
+{
+  id: "sep-5",
+  date: "2026-09-05",
+  day: 5,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 스탠드업어셈블",
+  startTime: "20:30",
+  price: 33000,
+},
+
+{
+  id: "sep-6-seoul",
+  date: "2026-09-06",
+  day: 6,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "15:00",
+  price: 33000,
+},
+
+{
+  id: "sep-6-meta",
+  date: "2026-09-06",
+  day: 6,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 크라우드워크 어셈블",
+  startTime: "19:00",
+  price: 33000,
+},
+
+{
+  id: "sep-7",
+  date: "2026-09-07",
+  day: 7,
+  category: "samgak",
+  venueKey: "samgak",
+  title: "삼각지대 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-10",
+  date: "2026-09-10",
+  day: 10,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 스탠드업어셈블",
+  startTime: "20:00",
+  price: 33000,
+},
+
+{
+  id: "sep-14",
+  date: "2026-09-14",
+  day: 14,
+  category: "etc",
+  venueKey: "namgeukjang",
+  title: "스탠드업 코미디 클럽",
+  startTime: "19:30",
+  price: 27000,
+},
+
+{
+  id: "sep-16",
+  date: "2026-09-16",
+  day: 16,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-17",
+  date: "2026-09-17",
+  day: 17,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 크라우드워크 어셈블",
+  startTime: "20:00",
+  price: 33000,
+},
+
+{
+  id: "sep-18",
+  date: "2026-09-18",
+  day: 18,
+  category: "etc",
+  venueKey: "gangnam",
+  title: "강남 코미디 라운지",
+  startTime: "20:00",
+  price: 33000,
+},
+
+{
+  id: "sep-19-18",
+  date: "2026-09-19",
+  day: 19,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "18:00",
+  price: 33000,
+},
+
+{
+  id: "sep-19-2130",
+  date: "2026-09-19",
+  day: 19,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "21:30",
+  price: 33000,
+},
+
+{
+  id: "sep-20",
+  date: "2026-09-20",
+  day: 20,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "15:00",
+  price: 33000,
+},
+
+{
+  id: "sep-21",
+  date: "2026-09-21",
+  day: 21,
+  category: "samgak",
+  venueKey: "samgak",
+  title: "삼각지대 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-23",
+  date: "2026-09-23",
+  day: 23,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-24",
+  date: "2026-09-24",
+  day: 24,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "17:00",
+  price: 33000,
+},
+
+{
+  id: "sep-26",
+  date: "2026-09-26",
+  day: 26,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 스탠드업어셈블",
+  startTime: "20:30",
+  price: 33000,
+},
+
+{
+  id: "sep-27-meta",
+  date: "2026-09-27",
+  day: 27,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 스탠드업어셈블 SE",
+  startTime: "19:00",
+  price: 22000,
+},
+
+{
+  id: "sep-27-seoul",
+  date: "2026-09-27",
+  day: 27,
+  category: "seoul",
+  venueKey: "seoul",
+  title: "서울코미디클럽 올스타즈",
+  startTime: "15:00",
+  price: 33000,
+},
+
+{
+  id: "sep-28",
+  date: "2026-09-28",
+  day: 28,
+  category: "samgak",
+  venueKey: "samgak",
+  title: "삼각지대 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+},
+
+{
+  id: "sep-30",
+  date: "2026-09-30",
+  day: 30,
+  category: "meta",
+  venueKey: "meta",
+  title: "메타코미디클럽 오픈마이크",
+  startTime: "20:00",
+  price: 5000,
+}
 ];
 
 const isEventEnded = (evtDateStr, startTimeStr) => {
@@ -636,7 +901,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
                 rel="noreferrer"
                 className="px-3.5 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-black transition shadow-lg shadow-red-600/30 block text-center animate-pulse"
               >
-                🎟 예매
+                🔗 예매
               </a>
             </div>
           )}
@@ -777,7 +1042,7 @@ function VenueInfoCards() {
   <img
     src="/icons/us.png"
     alt="미국 국기"
-    className="w-8 h-8 object-contain"
+    className="w-14 h-14 object-contain"
   />
 </div>
   <div>
@@ -789,7 +1054,7 @@ function VenueInfoCards() {
     </h4>
   </div>
 </div>
-          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준 등 최고의 팟캐스트.</p>
+          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준의 대한민국 최고의 팟캐스트.</p>
           <div className="pt-1">
             <a 
               href="https://www.youtube.com/@americanjoke0" 
@@ -878,14 +1143,14 @@ function EventModal({ isOpen, onClose, dayString, events }) {
                   </div>
 
                   <div className="flex gap-1.5 pt-1.5 border-t border-neutral-200 dark:border-neutral-700/60">
-                    {evt.booking && (
-                      <a
-                        href={evt.booking}
-                        target="_blank"
-                        rel="noreferrer"
+                    {(evt.booking || venueInfo?.booking) && (
+  <a
+    href={evt.booking || venueInfo.booking}
+    target="_blank"
+    rel="noreferrer"
                         className="flex-1 py-2 bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white rounded-xl text-[11px] font-bold text-center block"
                       >
-                        🎟 예매하기
+                        🔗 예매하기
                       </a>
                     )}
                     {venueInfo && venueInfo.instagram && (
@@ -950,6 +1215,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
     }
   };
 
+  
   const eventsByDay = useMemo(() => {
     const map = {};
     events.forEach((evt) => {
@@ -1011,12 +1277,12 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           {days.map((day) => {
             const dayEvents = eventsByDay[day] || [];
 
-            
-
             const uniqueDayEvents = dayEvents.filter(
   (evt, index, self) =>
     index === self.findIndex((e) => e.category === evt.category)
 );
+
+            
 
             const hasEvents = dayEvents.length > 0;
             const isToday = currentYear === year && currentMonth === month && currentDay === day;
@@ -1045,10 +1311,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
                   <div className="flex flex-wrap justify-center gap-0 mb-0.5">
   {uniqueDayEvents.map((evt, index) => {
-    const uniqueDayEvents = dayEvents.filter(
-  (evt, index, self) =>
-    index === self.findIndex((e) => e.category === evt.category)
-);
+
   const iconMap = {
     seoul: "/icons/seococl.png",
     meta: "/icons/metacocl.png",
@@ -1461,22 +1724,30 @@ useEffect(() => {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
   useEffect(() => {
-  const saved = localStorage.getItem('taehyun_events_final_v8');
-
-  if (saved) {
-    setEvents(JSON.parse(saved));
-  }
-}, []);
-
-useEffect(() => {
   const saved = localStorage.getItem("taehyun_events_final_v8");
 
   if (saved) {
-    setEvents(JSON.parse(saved));
+    const savedEvents = JSON.parse(saved);
+
+    // 기존 저장 일정 + INITIAL_EVENTS 합치기
+    const mergedEvents = [...savedEvents];
+
+    INITIAL_EVENTS.forEach((newEvent) => {
+      const exists = mergedEvents.some(
+        (savedEvent) => savedEvent.id === newEvent.id
+      );
+
+      if (!exists) {
+        mergedEvents.push(newEvent);
+      }
+    });
+
+    setEvents(mergedEvents);
   }
 
   setEventsLoaded(true);
 }, []);
+
 
 useEffect(() => {
   const loadEventsFromFirebase = async () => {
@@ -1491,7 +1762,21 @@ useEffect(() => {
   .filter((event) => event.date);
 
      if (firebaseEvents.length > 0) {
-  setEvents(firebaseEvents);
+  setEvents((prev) => {
+    const merged = [...prev];
+
+    firebaseEvents.forEach((newEvent) => {
+      const exists = merged.some(
+        (event) => event.id === newEvent.id
+      );
+
+      if (!exists) {
+        merged.push(newEvent);
+      }
+    });
+
+    return merged;
+  });
 }
     } catch (error) {
       console.error("Firebase 일정 불러오기 오류:", error);
