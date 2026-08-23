@@ -1054,7 +1054,7 @@ function VenueInfoCards() {
     </h4>
   </div>
 </div>
-          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준의 대한민국 최고의 팟캐스트.</p>
+          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">김태현, 이제규, 문성준의 대한민국 최고의 팟캐스트.</p>
           <div className="pt-1">
             <a 
               href="https://www.youtube.com/@americanjoke0" 
