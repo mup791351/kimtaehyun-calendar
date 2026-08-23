@@ -699,7 +699,7 @@ function VenueInfoCards() {
   <img
     src="/icons/metacocl.png"
     alt="메타코미디클럽"
-    className="w-10 h-10 object-contain"
+    className="w-14 h-14 object-contain"
   />
   <div>
     <span className="text-[10px] font-bold text-orange-400">
@@ -789,7 +789,7 @@ function VenueInfoCards() {
     </h4>
   </div>
 </div>
-          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준 등 최고의 만담 콘텐츠.</p>
+          <p className="text-[11px] text-neutral-500 dark:text-neutral-400">출연: 김태현, 이제규, 문성준 등 최고의 팟캐스트.</p>
           <div className="pt-1">
             <a 
               href="https://www.youtube.com/@americanjoke0" 
@@ -983,7 +983,9 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
             ‹
           </button>
           <div className="text-center">
-            <h2 className="text-base sm:text-xl font-black text-neutral-900 dark:text-white">{year}년 {month + 1}월</h2>
+            <h2 className="text-base sm:text-xl font-black text-white">
+  {month + 1}월
+</h2>
           </div>
           <button
             onClick={handleNextMonth}
@@ -995,7 +997,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
         <div className="grid grid-cols-7 mb-1.5 text-center">
           {["월", "화", "수", "목", "금", "토", "일"].map((day, index) => (
-            <div key={day} className={`font-extrabold text-[11px] py-1 ${index === 5 ? "text-blue-500" : index === 6 ? "text-red-500" : "text-neutral-400"}`}>
+            <div key={day} className={`font-extrabold text-[15px] py-1 ${index === 5 ? "text-blue-500" : index === 6 ? "text-red-500" : "text-neutral-400"}`}>
               {day}
             </div>
           ))}
@@ -1008,6 +1010,13 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
           {days.map((day) => {
             const dayEvents = eventsByDay[day] || [];
+
+            
+
+            const uniqueDayEvents = dayEvents.filter(
+  (evt, index, self) =>
+    index === self.findIndex((e) => e.category === evt.category)
+);
 
             const hasEvents = dayEvents.length > 0;
             const isToday = currentYear === year && currentMonth === month && currentDay === day;
@@ -1035,7 +1044,11 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
                   </div>
 
                   <div className="flex flex-wrap justify-center gap-0 mb-0.5">
-  {dayEvents.map((evt, index) => {
+  {uniqueDayEvents.map((evt, index) => {
+    const uniqueDayEvents = dayEvents.filter(
+  (evt, index, self) =>
+    index === self.findIndex((e) => e.category === evt.category)
+);
   const iconMap = {
     seoul: "/icons/seococl.png",
     meta: "/icons/metacocl.png",
@@ -1058,10 +1071,12 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           src={icon}
           alt=""
           className={`w-full h-full object-contain ${
-            evt.category === "solo"
-              ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-              : ""
-          }`}
+  evt.category === "solo"
+    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+    : evt.category === "meta"
+      ? "scale-125"
+      : ""
+}`}
         />
       ) : (
   <span className="text-xs leading-none">
