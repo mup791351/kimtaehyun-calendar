@@ -253,7 +253,7 @@ const INITIAL_EVENTS = [
     startTime: "20:00",
     lineup: ["김태현", "임명환", "국원준", "김용준", "도준혁", "강태훈", "홍승상", "문성준"],
     price: 10000,
-    booking: "https://docs.google.com/forms/d/e/1FAIpQLSfGHLErwl5c7N2qSkrenXqVm0OV1HXRKuhZ3wb1xxOSO06Osw/viewform",
+    booking: "https://docs.google.com/forms/d/e/1FAIpQLSfl_KvPNeGqiuhRcp5WlfW8RG9yepEI8Os4i1aHEnPM1MbQyQ/viewform",
     description: "삼각지대 쇼케이스 무대."
   },
   {
@@ -1765,13 +1765,17 @@ useEffect(() => {
   setEvents((prev) => {
     const merged = [...prev];
 
-    firebaseEvents.forEach((newEvent) => {
-      const exists = merged.some(
-        (event) => event.id === newEvent.id
+    firebaseEvents.forEach((firebaseEvent) => {
+      const index = merged.findIndex(
+        (event) => event.id === firebaseEvent.id
       );
 
-      if (!exists) {
-        merged.push(newEvent);
+      if (index !== -1) {
+        // 같은 ID가 있으면 Firebase 최신 데이터로 교체
+        merged[index] = firebaseEvent;
+      } else {
+        // 새로운 일정이면 추가
+        merged.push(firebaseEvent);
       }
     });
 
