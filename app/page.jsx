@@ -422,7 +422,7 @@ const INITIAL_EVENTS = [
     startTime: "20:00",
     lineup: ["미국식만담(김태현,문성준)", "영구쇼(김영구,손예린)", "광팔이 구정모", "주원빈", "김학영", "종이호랑이(국원준,홍승상)", "보케모드"],
     price: 10000,
-    booking: "https://docs.google.com/forms/d/e/1FAIpQLSfGHLErwl5c7N2qSkrenXqVm0OV1HXRKuhZ3wb1xxOSO06Osw/viewform",
+    booking: "https://docs.google.com/forms/d/e/1FAIpQLSemMs1ujFYpWDnlSUVEeFdSzcmJfVzxi3ybhOP_ODuDCSZWUw/viewform?pli=1",
     description: "삼각지대 특별 기획공연 [장르를 이탈하였습니다]."
   },
   {
