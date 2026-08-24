@@ -1140,6 +1140,16 @@ function EventModal({ isOpen, onClose, dayString, events }) {
                     {venueInfo && <p className="flex items-center gap-1">📍 {venueInfo.name}</p>}
                     {evt.lineup && evt.lineup.length > 0 && <p className="flex items-center gap-1">👤 {evt.lineup.join(" · ")}</p>}
                     {evt.price > 0 && <p className="font-bold text-neutral-900 dark:text-white pt-0.5">💰 ₩ {evt.price.toLocaleString()}</p>}
+                    {evt.description && (
+  <div className="mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700/60">
+    <p className="text-[10px] font-black text-neutral-400 mb-1">
+      공연 소개
+    </p>
+    <p className="text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+      {evt.description}
+    </p>
+  </div>
+)}
                   </div>
 
                   <div className="flex gap-1.5 pt-1.5 border-t border-neutral-200 dark:border-neutral-700/60">
