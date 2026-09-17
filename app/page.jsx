@@ -5,8 +5,7 @@ import { db } from "../lib/firebase";
 import {
   collection,
   getDocs,
-  addDoc,
-  updateDoc,
+
   setDoc,
   deleteDoc,
   doc,
@@ -1174,8 +1173,8 @@ function Legend({ catKey, cat, isActive, onClick }) {
     <button
       onClick={() => onClick(catKey)}
       className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${isActive
-          ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105`
-          : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
+        ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105`
+        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
         }`}
     >
       {catKey === "etc" ? (
@@ -1187,8 +1186,8 @@ function Legend({ catKey, cat, isActive, onClick }) {
           src={cat.icon}
           alt=""
           className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${catKey === "solo"
-              ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-              : ""
+            ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+            : ""
             }`}
         />
       )}
@@ -1403,8 +1402,8 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
                 <button
                   onClick={() => handleDayClick(day)}
                   className={`w-full h-16 sm:h-20 rounded-xl p-1 flex flex-col justify-between transition-all text-left border overflow-hidden ${hasEvents
-                      ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
-                      : "border-transparent active:bg-[#151515]"
+                    ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
+                    : "border-transparent active:bg-[#151515]"
                     } ${isToday ? "ring-2 ring-black dark:ring-white bg-orange-50/60 dark:bg-orange-950/30" : ""}`}
                 >
                   <div className="flex flex-col w-full">
@@ -1443,10 +1442,10 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
                               src={icon}
                               alt=""
                               className={`w-full h-full object-contain ${evt.category === "solo"
-                                  ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-                                  : evt.category === "meta"
-                                    ? "scale-125"
-                                    : ""
+                                ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+                                : evt.category === "meta"
+                                  ? "scale-125"
+                                  : ""
                                 }`}
                             />
                           ) : (
@@ -1478,8 +1477,8 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
             <button
               onClick={() => onCategoryChange("all")}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${activeCategory === "all"
-                  ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105"
-                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
+                ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105"
+                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
                 }`}
             >
               전체 보기
@@ -1995,7 +1994,11 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
                           수정
                         </button>
                         <button
-                          onClick={() => onDeleteEvent(evt.id)}
+                          onClick={() => {
+                            if (window.confirm("삭제하시겠습니까? 진짜진짜로???")) {
+                              onDeleteEvent(evt.id);
+                            }
+                          }}
                           className="px-2.5 py-1 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700"
                         >
                           삭제
@@ -2045,67 +2048,81 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState(null);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("taehyun_events_final_v8");
 
-    if (saved) {
-      const savedEvents = JSON.parse(saved);
-
-      // 기존 저장 일정 + INITIAL_EVENTS 합치기
-      const mergedEvents = [...savedEvents];
-
-      INITIAL_EVENTS.forEach((newEvent) => {
-        const exists = mergedEvents.some(
-          (savedEvent) => savedEvent.id === newEvent.id
-        );
-
-        if (!exists) {
-          mergedEvents.push(newEvent);
-        }
-      });
-
-      setEvents(mergedEvents);
-    }
-
-    setEventsLoaded(true);
-  }, []);
 
 
   useEffect(() => {
     const loadEventsFromFirebase = async () => {
       try {
         const snapshot = await getDocs(collection(db, "events"));
+        const deletedIds = new Set(
+          snapshot.docs
+            .filter((docSnap) => docSnap.data().deleted === true)
+            .map((docSnap) => docSnap.data().id || docSnap.id)
+        );
 
-        const firebaseEvents = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter((event) => event.date);
+        const firebaseEventMap = new Map();
 
-        if (firebaseEvents.length > 0) {
-          setEvents((prev) => {
-            const merged = [...prev];
+        snapshot.docs.forEach((docSnap) => {
+          const data = docSnap.data();
 
-            firebaseEvents.forEach((firebaseEvent) => {
-              const index = merged.findIndex(
-                (event) => event.id === firebaseEvent.id
-              );
+          // 예전 데이터에 저장돼 있던 id가 있으면 그걸 일정의 원래 ID로 사용
+          const logicalId = data.id || docSnap.id;
 
-              if (index !== -1) {
-                // 같은 ID가 있으면 Firebase 최신 데이터로 교체
-                merged[index] = firebaseEvent;
-              } else {
-                // 새로운 일정이면 추가
-                merged.push(firebaseEvent);
-              }
-            });
+          if (!data.date || deletedIds.has(logicalId)) return;
 
-            return merged;
-          });
-        }
+          const event = {
+            ...data,
+            id: logicalId,
+          };
+
+          const existing = firebaseEventMap.get(logicalId);
+
+          // 같은 일정이 Firebase에 두 개 있다면
+          // 문서 ID와 일정 ID가 같은 최신 방식의 문서를 우선 사용
+          if (!existing || docSnap.id === logicalId) {
+            firebaseEventMap.set(logicalId, event);
+          }
+        });
+
+        const firebaseEvents = [...firebaseEventMap.values()];
+
+        const merged = INITIAL_EVENTS.filter(
+          (event) => !deletedIds.has(event.id)
+        );
+
+        firebaseEvents.forEach((firebaseEvent) => {
+          const index = merged.findIndex(
+            (event) => event.id === firebaseEvent.id
+          );
+
+          if (index !== -1) {
+            // Firebase에 수정된 일정이 있으면 Firebase 버전 우선
+            merged[index] = firebaseEvent;
+          } else {
+            // 사이트에서 새로 추가한 일정
+            merged.push(firebaseEvent);
+          }
+        });
+
+        setEvents(merged);
       } catch (error) {
         console.error("Firebase 일정 불러오기 오류:", error);
+
+        // Firebase 연결 실패 시에만 localStorage 백업 사용
+        const saved = localStorage.getItem("taehyun_events_final_v8");
+
+        if (saved) {
+          try {
+            setEvents(JSON.parse(saved));
+          } catch (e) {
+            setEvents(INITIAL_EVENTS);
+          }
+        } else {
+          setEvents(INITIAL_EVENTS);
+        }
+      } finally {
+        setEventsLoaded(true);
       }
     };
 
@@ -2182,14 +2199,22 @@ export default function App() {
 
   const handleAddEvent = async (newEvt) => {
     try {
-      const docRef = await addDoc(collection(db, "events"), newEvt);
+      await setDoc(
+        doc(db, "events", newEvt.id),
+        newEvt
+      );
 
-      const savedEvent = {
-        ...newEvt,
-        id: docRef.id,
-      };
+      setEvents((prev) => {
+        const exists = prev.some((event) => event.id === newEvt.id);
 
-      setEvents((prev) => [savedEvent, ...prev]);
+        if (exists) {
+          return prev.map((event) =>
+            event.id === newEvt.id ? newEvt : event
+          );
+        }
+
+        return [newEvt, ...prev];
+      });
 
       showToast("새로운 일정이 추가되었습니다! 🎉");
     } catch (error) {
@@ -2219,43 +2244,47 @@ export default function App() {
   };
 
   const handleDeleteEvent = async (eventId) => {
-    try {
-      // 1. eventId와 같은 문서 ID가 있으면 삭제
-      const directRef = doc(db, "events", eventId);
+  try {
+    // 예전 방식으로 중복 생성된 문서가 있으면 먼저 정리
+    const q = query(
+      collection(db, "events"),
+      where("id", "==", eventId)
+    );
 
-      try {
-        await deleteDoc(directRef);
-      } catch (error) {
-        console.log("직접 삭제 실패, id 필드로 검색합니다.");
-      }
+    const snapshot = await getDocs(q);
 
-      // 2. 문서 ID가 다른 기존 일정이면
-      // 문서 안의 id 필드로 찾아서 삭제
-      const q = query(
-        collection(db, "events"),
-        where("id", "==", eventId)
-      );
-
-      const snapshot = await getDocs(q);
-
-      for (const document of snapshot.docs) {
+    for (const document of snapshot.docs) {
+      if (document.id !== eventId) {
         await deleteDoc(document.ref);
       }
-
-      // 3. 화면에서도 삭제
-      setEvents((prev) => prev.filter((e) => e.id !== eventId));
-
-      // 4. 고정 일정이었다면 고정 해제
-      if (pinnedEventId === eventId) {
-        setPinnedEventId(null);
-      }
-
-      showToast("일정이 삭제되었습니다.");
-    } catch (error) {
-      console.error("Firebase 삭제 오류:", error);
-      showToast("Firebase 삭제에 실패했습니다.");
     }
-  };
+
+    // 삭제된 일정이라는 기록을 events 안에 남김
+    await setDoc(
+      doc(db, "events", eventId),
+      {
+        id: eventId,
+        deleted: true,
+        deletedAt: new Date().toISOString(),
+      }
+    );
+
+    // 화면에서 제거
+    setEvents((prev) =>
+      prev.filter((e) => e.id !== eventId)
+    );
+
+    // Next Show 고정 일정이었다면 해제
+    if (pinnedEventId === eventId) {
+      setPinnedEventId(null);
+    }
+
+    showToast("일정이 삭제되었습니다.");
+  } catch (error) {
+    console.error("Firebase 삭제 오류:", error);
+    showToast("Firebase 삭제에 실패했습니다.");
+  }
+};
   useEffect(() => {
     const loadPinnedEvent = async () => {
       try {
