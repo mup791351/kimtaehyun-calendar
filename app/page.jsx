@@ -70,7 +70,7 @@ const MailIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
   </svg>
-);const SunIcon = ({ className = "w-4 h-4" }) => (
+); const SunIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
@@ -104,7 +104,7 @@ const VENUES = {
     instagram: "https://www.instagram.com/comedy_samgakjidae?igsh=MXdnbDE2dG1mcG11dQ==",
     booking: "https://docs.google.com/forms/d/e/1FAIpQLSfGHLErwl5c7N2qSkrenXqVm0OV1HXRKuhZ3wb1xxOSO06Osw/viewform"
   },
-    gangnam: {
+  gangnam: {
     name: "스타이즈본라운지",
     address: "서울 서초구 서초대로 75길 36 지하1층 101호",
     instagram: "https://www.instagram.com/starisbornseoul/",
@@ -117,6 +117,88 @@ const VENUES = {
     instagram: "https://www.instagram.com/standupcomedyclub_kr/",
     booking: "https://m.booking.naver.com/booking/6/bizes/1601050/items/7844800?area=ple&lang=ko&startDate=2026-08-03&theme=place"
   }
+};
+
+const EVENT_PRESETS = {
+  meta_assembly: {
+    label: "스탠드업어셈블",
+    title: "메타코미디클럽 스탠드업어셈블",
+    category: "meta",
+    venueKey: "meta",
+    price: 33000,
+    booking: "https://booking.naver.com/booking/12/bizes/1037135/items/6775565",
+    description: "",
+  },
+
+  meta_assembly_se: {
+    label: "스탠드업어셈블 SE",
+    title: "메타코미디클럽 스탠드업어셈블 SE",
+    category: "meta",
+    venueKey: "meta",
+    price: 22000,
+    booking: "https://booking.naver.com/booking/12/bizes/1037135/items/6849154",
+    description: "",
+  },
+
+  meta_openmic: {
+    label: "오픈마이크",
+    title: "메타코미디클럽 오픈마이크",
+    category: "meta",
+    venueKey: "meta",
+    price: 5000,
+    booking: "https://booking.naver.com/booking/12/bizes/1037135?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+    description: "",
+  },
+
+  meta_crowdwork: {
+    label: "크라우드워크어셈블",
+    title: "메타코미디클럽 크라우드워크어셈블",
+    category: "meta",
+    venueKey: "meta",
+    price: 33000,
+    booking: "https://booking.naver.com/booking/12/bizes/1037135/items/7586165",
+    description: "",
+  },
+
+  samgak_openmic: {
+    label: "오픈마이크",
+    title: "삼각지대 오픈마이크",
+    category: "samgak",
+    venueKey: "samgak",
+    price: 5000,
+    booking: "https://docs.google.com/forms/d/e/1FAIpQLSfGHLErwl5c7N2qSkrenXqVm0OV1HXRKuhZ3wb1xxOSO06Osw/viewform",
+    description: "",
+  },
+
+  samgak_comedynight: {
+    label: "코미디나이트",
+    title: "삼각지대 코미디나이트(쇼케이스)",
+    category: "samgak",
+    venueKey: "samgak",
+    price: 10000,
+    booking: "https://docs.google.com/forms/d/e/1FAIpQLSfl_KvPNeGqiuhRcp5WlfW8RG9yepEI8Os4i1aHEnPM1MbQyQ/viewform",
+    description: "",
+  },
+
+  seoul_allstars: {
+    label: "올스타즈",
+    title: "서울코미디클럽 올스타즈",
+    category: "seoul",
+    venueKey: "seoul",
+    price: 33000,
+    booking: "https://booking.naver.com/booking/12/bizes/627353/items/4217612",
+    description: "",
+  },
+
+  seoul_draft: {
+    label: "드래프트",
+    title: "서울코미디클럽 드래프트",
+    category: "seoul",
+    venueKey: "seoul",
+    price: 10000,
+    booking: "https://booking.naver.com/booking/12/bizes/627353/items/7783146",
+    description: "",
+  },
 };
 
 const CATEGORY_COLORS = {
@@ -517,257 +599,257 @@ const INITIAL_EVENTS = [
     description: "유튜브 [미국식농담] 오프라인 확장판! 생생한 라이브로 만나는 특별 온스테이지."
   },
   {
-  id: "sep-2",
-  date: "2026-09-02",
-  day: 2,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+    id: "sep-2",
+    date: "2026-09-02",
+    day: 2,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-3",
-  date: "2026-09-03",
-  day: 3,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 스탠드업어셈블",
-  startTime: "20:00",
-  price: 33000,
-},
+  {
+    id: "sep-3",
+    date: "2026-09-03",
+    day: 3,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 스탠드업어셈블",
+    startTime: "20:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-4",
-  date: "2026-09-04",
-  day: 4,
-  category: "etc",
-  venueKey: "gangnam",
-  title: "강남코미디라운지",
-  startTime: "20:00",
-  price: 33000,
-},
+  {
+    id: "sep-4",
+    date: "2026-09-04",
+    day: 4,
+    category: "etc",
+    venueKey: "gangnam",
+    title: "강남코미디라운지",
+    startTime: "20:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-5",
-  date: "2026-09-05",
-  day: 5,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 스탠드업어셈블",
-  startTime: "20:30",
-  price: 33000,
-},
+  {
+    id: "sep-5",
+    date: "2026-09-05",
+    day: 5,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 스탠드업어셈블",
+    startTime: "20:30",
+    price: 33000,
+  },
 
-{
-  id: "sep-6-seoul",
-  date: "2026-09-06",
-  day: 6,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "15:00",
-  price: 33000,
-},
+  {
+    id: "sep-6-seoul",
+    date: "2026-09-06",
+    day: 6,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "15:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-6-meta",
-  date: "2026-09-06",
-  day: 6,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 크라우드워크 어셈블",
-  startTime: "19:00",
-  price: 33000,
-},
+  {
+    id: "sep-6-meta",
+    date: "2026-09-06",
+    day: 6,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 크라우드워크 어셈블",
+    startTime: "19:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-7",
-  date: "2026-09-07",
-  day: 7,
-  category: "samgak",
-  venueKey: "samgak",
-  title: "삼각지대 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+  {
+    id: "sep-7",
+    date: "2026-09-07",
+    day: 7,
+    category: "samgak",
+    venueKey: "samgak",
+    title: "삼각지대 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-10",
-  date: "2026-09-10",
-  day: 10,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 스탠드업어셈블",
-  startTime: "20:00",
-  price: 33000,
-},
+  {
+    id: "sep-10",
+    date: "2026-09-10",
+    day: 10,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 스탠드업어셈블",
+    startTime: "20:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-14",
-  date: "2026-09-14",
-  day: 14,
-  category: "etc",
-  venueKey: "namgeukjang",
-  title: "스탠드업 코미디 클럽",
-  startTime: "19:30",
-  price: 27000,
-},
+  {
+    id: "sep-14",
+    date: "2026-09-14",
+    day: 14,
+    category: "etc",
+    venueKey: "namgeukjang",
+    title: "스탠드업 코미디 클럽",
+    startTime: "19:30",
+    price: 27000,
+  },
 
-{
-  id: "sep-16",
-  date: "2026-09-16",
-  day: 16,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+  {
+    id: "sep-16",
+    date: "2026-09-16",
+    day: 16,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-17",
-  date: "2026-09-17",
-  day: 17,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 크라우드워크 어셈블",
-  startTime: "20:00",
-  price: 33000,
-},
+  {
+    id: "sep-17",
+    date: "2026-09-17",
+    day: 17,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 크라우드워크 어셈블",
+    startTime: "20:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-18",
-  date: "2026-09-18",
-  day: 18,
-  category: "etc",
-  venueKey: "gangnam",
-  title: "강남 코미디 라운지",
-  startTime: "20:00",
-  price: 33000,
-},
+  {
+    id: "sep-18",
+    date: "2026-09-18",
+    day: 18,
+    category: "etc",
+    venueKey: "gangnam",
+    title: "강남 코미디 라운지",
+    startTime: "20:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-19-18",
-  date: "2026-09-19",
-  day: 19,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "18:00",
-  price: 33000,
-},
+  {
+    id: "sep-19-18",
+    date: "2026-09-19",
+    day: 19,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "18:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-19-2130",
-  date: "2026-09-19",
-  day: 19,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "21:30",
-  price: 33000,
-},
+  {
+    id: "sep-19-2130",
+    date: "2026-09-19",
+    day: 19,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "21:30",
+    price: 33000,
+  },
 
-{
-  id: "sep-20",
-  date: "2026-09-20",
-  day: 20,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "15:00",
-  price: 33000,
-},
+  {
+    id: "sep-20",
+    date: "2026-09-20",
+    day: 20,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "15:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-21",
-  date: "2026-09-21",
-  day: 21,
-  category: "samgak",
-  venueKey: "samgak",
-  title: "삼각지대 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+  {
+    id: "sep-21",
+    date: "2026-09-21",
+    day: 21,
+    category: "samgak",
+    venueKey: "samgak",
+    title: "삼각지대 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-23",
-  date: "2026-09-23",
-  day: 23,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+  {
+    id: "sep-23",
+    date: "2026-09-23",
+    day: 23,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-24",
-  date: "2026-09-24",
-  day: 24,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "17:00",
-  price: 33000,
-},
+  {
+    id: "sep-24",
+    date: "2026-09-24",
+    day: 24,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "17:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-26",
-  date: "2026-09-26",
-  day: 26,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 스탠드업어셈블",
-  startTime: "20:30",
-  price: 33000,
-},
+  {
+    id: "sep-26",
+    date: "2026-09-26",
+    day: 26,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 스탠드업어셈블",
+    startTime: "20:30",
+    price: 33000,
+  },
 
-{
-  id: "sep-27-meta",
-  date: "2026-09-27",
-  day: 27,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 스탠드업어셈블 SE",
-  startTime: "19:00",
-  price: 22000,
-},
+  {
+    id: "sep-27-meta",
+    date: "2026-09-27",
+    day: 27,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 스탠드업어셈블 SE",
+    startTime: "19:00",
+    price: 22000,
+  },
 
-{
-  id: "sep-27-seoul",
-  date: "2026-09-27",
-  day: 27,
-  category: "seoul",
-  venueKey: "seoul",
-  title: "서울코미디클럽 올스타즈",
-  startTime: "15:00",
-  price: 33000,
-},
+  {
+    id: "sep-27-seoul",
+    date: "2026-09-27",
+    day: 27,
+    category: "seoul",
+    venueKey: "seoul",
+    title: "서울코미디클럽 올스타즈",
+    startTime: "15:00",
+    price: 33000,
+  },
 
-{
-  id: "sep-28",
-  date: "2026-09-28",
-  day: 28,
-  category: "samgak",
-  venueKey: "samgak",
-  title: "삼각지대 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-},
+  {
+    id: "sep-28",
+    date: "2026-09-28",
+    day: 28,
+    category: "samgak",
+    venueKey: "samgak",
+    title: "삼각지대 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  },
 
-{
-  id: "sep-30",
-  date: "2026-09-30",
-  day: 30,
-  category: "meta",
-  venueKey: "meta",
-  title: "메타코미디클럽 오픈마이크",
-  startTime: "20:00",
-  price: 5000,
-}
+  {
+    id: "sep-30",
+    date: "2026-09-30",
+    day: 30,
+    category: "meta",
+    venueKey: "meta",
+    title: "메타코미디클럽 오픈마이크",
+    startTime: "20:00",
+    price: 5000,
+  }
 ];
 
 const isEventEnded = (evtDateStr, startTimeStr) => {
@@ -801,7 +883,7 @@ const getDdayText = (evtDateStr) => {
 };
 
 function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
-    const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -809,12 +891,28 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
   return (
     <>
       <header className="flex flex-col items-center text-center pt-0 relative">
-          
+
+        <button
+          type="button"
+          onClick={onShare}
+          className="absolute left-3 top-3 z-20
+             w-8 h-8 rounded-full
+             bg-neutral-100/80 dark:bg-neutral-800/80
+             backdrop-blur-sm
+             border border-neutral-200 dark:border-neutral-700
+             flex items-center justify-center
+             text-neutral-600 dark:text-neutral-300
+             hover:bg-neutral-200 dark:hover:bg-neutral-700
+             active:scale-95 transition"
+          aria-label="공유하기"
+        >
+          <ShareIcon className="w-3.5 h-3.5" />
+        </button>
 
 
         {/* Profile Image - Slim horizontal layout with 4-side gradient fade */}
         <div className="w-full max-w-xs mb-2 mt-0 px-4">
-          <div 
+          <div
             className="w-full h-32 sm:h-40 relative overflow-hidden flex items-center justify-center"
             style={{
               maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
@@ -886,10 +984,10 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
             </div>
 
             <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">
-  {nextShow.date.split('-')[1]}월 {nextShow.date.split('-')[2]}일 {nextShow.startTime}
-</h2>
+              {nextShow.date.split('-')[1]}월 {nextShow.date.split('-')[2]}일 {nextShow.startTime}
+            </h2>
             <p className="text-neutral-600 dark:text-neutral-300 text-xs font-semibold flex items-center gap-1 flex-wrap">
-              📍 {(nextShow.venueKey && VENUES[nextShow.venueKey]?.name) || "온라인"} — <span className="text-neutral-900 dark:text-white font-bold">{nextShow.title}</span>
+              📍 {(nextShow.venueKey && VENUES[nextShow.venueKey]?.name) || nextShow.customVenue || "온라인"} — <span className="text-neutral-900 dark:text-white font-bold">{nextShow.title}</span>
             </p>
           </div>
 
@@ -922,34 +1020,34 @@ function VenueInfoCards() {
         {/* 서울코미디클럽 */}
         <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
           <div className="flex items-center gap-3">
-  <img
-    src="/icons/seococl.png"
-    alt="서울코미디클럽"
-    className="w-10 h-10 object-contain"
-  />
-  <div>
-    <span className="text-[10px] font-bold text-blue-400">
-      서울코미디클럽
-    </span>
-    <h4 className="font-black text-sm text-white">
-      서울코미디클럽 올스타즈
-    </h4>
-  </div>
-</div>
-        
+            <img
+              src="/icons/seococl.png"
+              alt="서울코미디클럽"
+              className="w-10 h-10 object-contain"
+            />
+            <div>
+              <span className="text-[10px] font-bold text-blue-400">
+                서울코미디클럽
+              </span>
+              <h4 className="font-black text-sm text-white">
+                서울코미디클럽 올스타즈
+              </h4>
+            </div>
+          </div>
+
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 종로구 대학로8가길 64 김동진빌딩 지하1층</p>
           <div className="flex gap-2 pt-1">
-            <a 
-              href={VENUES.seoul.instagram} 
-              target="_blank" 
+            <a
+              href={VENUES.seoul.instagram}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-900 dark:text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
-            <a 
-              href={VENUES.seoul.booking} 
-              target="_blank" 
+            <a
+              href={VENUES.seoul.booking}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center transition"
             >
@@ -961,34 +1059,34 @@ function VenueInfoCards() {
         {/* 메타코미디클럽 홍대 */}
         <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
           <div className="flex items-center gap-3">
-  <img
-    src="/icons/metacocl.png"
-    alt="메타코미디클럽"
-    className="w-14 h-14 object-contain"
-  />
-  <div>
-    <span className="text-[10px] font-bold text-orange-400">
-      메타코미디클럽
-    </span>
-    <h4 className="font-black text-sm text-white">
-      메타코미디클럽 홍대
-    </h4>
-  </div>
-</div>
-          
+            <img
+              src="/icons/metacocl.png"
+              alt="메타코미디클럽"
+              className="w-14 h-14 object-contain"
+            />
+            <div>
+              <span className="text-[10px] font-bold text-orange-400">
+                메타코미디클럽
+              </span>
+              <h4 className="font-black text-sm text-white">
+                메타코미디클럽 홍대
+              </h4>
+            </div>
+          </div>
+
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 마포구 와우산로 76-1 2층</p>
           <div className="flex gap-2 pt-1">
-            <a 
-              href={VENUES.meta.instagram} 
-              target="_blank" 
+            <a
+              href={VENUES.meta.instagram}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-900 dark:text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
-            <a 
-              href={VENUES.meta.booking} 
-              target="_blank" 
+            <a
+              href={VENUES.meta.booking}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold text-center transition"
             >
@@ -1000,33 +1098,33 @@ function VenueInfoCards() {
         {/* 삼각지대 */}
         <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
           <div className="flex items-center gap-3">
-  <img
-    src="/icons/samgakjidae.png"
-    alt="삼각지대"
-    className="w-10 h-10 object-contain"
-  />
-  <div>
-    <span className="text-[10px] font-bold text-emerald-400">
-      삼각지대
-    </span>
-    <h4 className="font-black text-sm text-white">
-      삼각지대 오픈마이크 & 쇼케이스
-    </h4>
-  </div>
-</div>
+            <img
+              src="/icons/samgakjidae.png"
+              alt="삼각지대"
+              className="w-10 h-10 object-contain"
+            />
+            <div>
+              <span className="text-[10px] font-bold text-emerald-400">
+                삼각지대
+              </span>
+              <h4 className="font-black text-sm text-white">
+                삼각지대 오픈마이크 & 쇼케이스
+              </h4>
+            </div>
+          </div>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">주소: 서울 용산구 한강대로48길 17-6 펀타스틱 씨어터</p>
           <div className="flex gap-2 pt-1">
-            <a 
-              href={VENUES.samgak.instagram} 
-              target="_blank" 
+            <a
+              href={VENUES.samgak.instagram}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-900 dark:text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
-            <a 
-              href={VENUES.samgak.booking} 
-              target="_blank" 
+            <a
+              href={VENUES.samgak.booking}
+              target="_blank"
               rel="noreferrer"
               className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold text-center transition"
             >
@@ -1038,27 +1136,27 @@ function VenueInfoCards() {
         {/* 미국식 농담 */}
         <div className="p-4 rounded-2xl bg-[#111111] border border-neutral-800 shadow-sm space-y-2">
           <div className="flex items-center gap-3">
-  <div className="w-10 h-10 flex items-center justify-center">
-  <img
-    src="/icons/us.png"
-    alt="미국 국기"
-    className="w-14 h-14 object-contain"
-  />
-</div>
-  <div>
-    <span className="text-[10px] font-bold text-red-400">
-      미국식농담
-    </span>
-    <h4 className="font-black text-sm text-white">
-      매주 목금 유튜브 업로드
-    </h4>
-  </div>
-</div>
+            <div className="w-10 h-10 flex items-center justify-center">
+              <img
+                src="/icons/us.png"
+                alt="미국 국기"
+                className="w-14 h-14 object-contain"
+              />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-red-400">
+                미국식농담
+              </span>
+              <h4 className="font-black text-sm text-white">
+                매주 목금 유튜브 업로드
+              </h4>
+            </div>
+          </div>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">김태현, 이제규, 문성준의 대한민국 최고의 팟캐스트.</p>
           <div className="pt-1">
-            <a 
-              href="https://www.youtube.com/@americanjoke0" 
-              target="_blank" 
+            <a
+              href="https://www.youtube.com/@americanjoke0"
+              target="_blank"
               rel="noreferrer"
               className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition"
             >
@@ -1075,27 +1173,25 @@ function Legend({ catKey, cat, isActive, onClick }) {
   return (
     <button
       onClick={() => onClick(catKey)}
-      className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${
-        isActive
+      className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${isActive
           ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105`
           : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
-      }`}
+        }`}
     >
       {catKey === "etc" ? (
- <span className="text-xs leading-none">
-  🎸
-</span>
-) : (
-  <img
-  src={cat.icon}
-  alt=""
-  className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${
-  catKey === "solo"
-    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-    : ""
-}`}
-/>
-)}
+        <span className="text-xs leading-none">
+          🎸
+        </span>
+      ) : (
+        <img
+          src={cat.icon}
+          alt=""
+          className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${catKey === "solo"
+              ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+              : ""
+            }`}
+        />
+      )}
       <span>{cat.label}</span>
     </button>
   );
@@ -1137,27 +1233,31 @@ function EventModal({ isOpen, onClose, dayString, events }) {
 
                   <div className="space-y-0.5 text-[11px] text-neutral-600 dark:text-neutral-300 font-medium">
                     <p className="flex items-center gap-1">🕒 {evt.startTime}</p>
-                    {venueInfo && <p className="flex items-center gap-1">📍 {venueInfo.name}</p>}
+                    {(venueInfo || evt.customVenue) && (
+                      <p className="flex items-center gap-1">
+                        📍 {venueInfo?.name || evt.customVenue}
+                      </p>
+                    )}
                     {evt.lineup && evt.lineup.length > 0 && <p className="flex items-center gap-1">👤 {evt.lineup.join(" · ")}</p>}
                     {evt.price > 0 && <p className="font-bold text-neutral-900 dark:text-white pt-0.5">💰 ₩ {evt.price.toLocaleString()}</p>}
                     {evt.description && (
-  <div className="mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700/60">
-    <p className="text-[10px] font-black text-neutral-400 mb-1">
-      공연 소개
-    </p>
-    <p className="text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300">
-      {evt.description}
-    </p>
-  </div>
-)}
+                      <div className="mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700/60">
+                        <p className="text-[10px] font-black text-neutral-400 mb-1">
+                          공연 소개
+                        </p>
+                        <p className="text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+                          {evt.description}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex gap-1.5 pt-1.5 border-t border-neutral-200 dark:border-neutral-700/60">
                     {(evt.booking || venueInfo?.booking) && (
-  <a
-    href={evt.booking || venueInfo.booking}
-    target="_blank"
-    rel="noreferrer"
+                      <a
+                        href={evt.booking || venueInfo.booking}
+                        target="_blank"
+                        rel="noreferrer"
                         className="flex-1 py-2 bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white rounded-xl text-[11px] font-bold text-center block"
                       >
                         🔗 예매하기
@@ -1225,7 +1325,7 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
     }
   };
 
-  
+
   const eventsByDay = useMemo(() => {
     const map = {};
     events.forEach((evt) => {
@@ -1260,8 +1360,8 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           </button>
           <div className="text-center">
             <h2 className="text-base sm:text-xl font-black text-white">
-  {month + 1}월
-</h2>
+              {month + 1}월
+            </h2>
           </div>
           <button
             onClick={handleNextMonth}
@@ -1288,11 +1388,11 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
             const dayEvents = eventsByDay[day] || [];
 
             const uniqueDayEvents = dayEvents.filter(
-  (evt, index, self) =>
-    index === self.findIndex((e) => e.category === evt.category)
-);
+              (evt, index, self) =>
+                index === self.findIndex((e) => e.category === evt.category)
+            );
 
-            
+
 
             const hasEvents = dayEvents.length > 0;
             const isToday = currentYear === year && currentMonth === month && currentDay === day;
@@ -1302,64 +1402,62 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
               <div key={day} className="relative">
                 <button
                   onClick={() => handleDayClick(day)}
-                  className={`w-full h-16 sm:h-20 rounded-xl p-1 flex flex-col justify-between transition-all text-left border overflow-hidden ${
-                    hasEvents
-  ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
-  : "border-transparent active:bg-[#151515]"
-                  } ${isToday ? "ring-2 ring-black dark:ring-white bg-orange-50/60 dark:bg-orange-950/30" : ""}`}
+                  className={`w-full h-16 sm:h-20 rounded-xl p-1 flex flex-col justify-between transition-all text-left border overflow-hidden ${hasEvents
+                      ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
+                      : "border-transparent active:bg-[#151515]"
+                    } ${isToday ? "ring-2 ring-black dark:ring-white bg-orange-50/60 dark:bg-orange-950/30" : ""}`}
                 >
                   <div className="flex flex-col w-full">
-<span className={`font-black text-xs leading-none ${isToday ? "text-red-500 font-extrabold" : isPast ? "text-neutral-600 font-normal" : hasEvents ? "text-white" : "text-neutral-500"}`}>
+                    <span className={`font-black text-xs leading-none ${isToday ? "text-red-500 font-extrabold" : isPast ? "text-neutral-600 font-normal" : hasEvents ? "text-white" : "text-neutral-500"}`}>
                       {day}
                     </span>
                     {isToday && (
                       <span className="text-[7px] font-black text-red-400 bg-red-950 px-1 py-0.5 rounded font-sans tracking-tighter w-max mt-0.5 scale-90 origin-left">
-  TODAY
-</span>
+                        TODAY
+                      </span>
                     )}
                   </div>
 
                   <div className="flex flex-wrap justify-center gap-0 mb-0.5">
-  {uniqueDayEvents.map((evt, index) => {
+                    {uniqueDayEvents.map((evt, index) => {
 
-  const iconMap = {
-    seoul: "/icons/seococl.png",
-    meta: "/icons/metacocl.png",
-    samgak: "/icons/samgakjidae.png",
-    solo: "/icons/taehyun.png",
-    etc: "🎸",
-  };
+                      const iconMap = {
+                        seoul: "/icons/seococl.png",
+                        meta: "/icons/metacocl.png",
+                        samgak: "/icons/samgakjidae.png",
+                        solo: "/icons/taehyun.png",
+                        etc: "🎸",
+                      };
 
-  const icon = iconMap[evt.category] || "🎸";
+                      const icon = iconMap[evt.category] || "🎸";
 
 
-  return (
-    <span
-  key={index}
-  title={evt.title}
-  className="w-5 h-5 flex-shrink-0 flex items-center justify-center"
->
-      {icon.startsWith("/") ? (
-        <img
-          src={icon}
-          alt=""
-          className={`w-full h-full object-contain ${
-  evt.category === "solo"
-    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-    : evt.category === "meta"
-      ? "scale-125"
-      : ""
-}`}
-        />
-      ) : (
-  <span className="text-xs leading-none">
-  {icon}
-</span>
-)}
-    </span>
-  );
-})}
-</div>
+                      return (
+                        <span
+                          key={index}
+                          title={evt.title}
+                          className="w-5 h-5 flex-shrink-0 flex items-center justify-center"
+                        >
+                          {icon.startsWith("/") ? (
+                            <img
+                              src={icon}
+                              alt=""
+                              className={`w-full h-full object-contain ${evt.category === "solo"
+                                  ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+                                  : evt.category === "meta"
+                                    ? "scale-125"
+                                    : ""
+                                }`}
+                            />
+                          ) : (
+                            <span className="text-xs leading-none">
+                              {icon}
+                            </span>
+                          )}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </button>
               </div>
             );
@@ -1379,11 +1477,10 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
           <div className="flex gap-1.5 overflow-x-auto py-2 scrollbar-none justify-start sm:justify-center">
             <button
               onClick={() => onCategoryChange("all")}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${
-                activeCategory === "all"
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${activeCategory === "all"
                   ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
-              }`}
+                }`}
             >
               전체 보기
             </button>
@@ -1420,11 +1517,76 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("seoul");
   const [venueKey, setVenueKey] = useState("seoul");
+  const [customVenue, setCustomVenue] = useState("");
   const [startTime, setStartTime] = useState("20:00");
   const [lineup, setLineup] = useState("김태현");
   const [price, setPrice] = useState(33000);
   const [booking, setBooking] = useState("");
   const [description, setDescription] = useState("");
+
+  const [adminDate, setAdminDate] = useState(() => {
+    const now = new Date();
+
+    return {
+      year: now.getFullYear(),
+      month: now.getMonth(),
+    };
+  });
+
+  const filteredAdminEvents = events
+    .filter((evt) => {
+      const [eventYear, eventMonth] = evt.date.split("-").map(Number);
+
+      return (
+        eventYear === adminDate.year &&
+        eventMonth === adminDate.month + 1
+      );
+    })
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const handleAdminPrevMonth = () => {
+    if (adminDate.month === 0) {
+      setAdminDate({
+        year: adminDate.year - 1,
+        month: 11,
+      });
+    } else {
+      setAdminDate({
+        year: adminDate.year,
+        month: adminDate.month - 1,
+      });
+    }
+  };
+
+  const handleAdminNextMonth = () => {
+    if (adminDate.month === 11) {
+      setAdminDate({
+        year: adminDate.year + 1,
+        month: 0,
+      });
+    } else {
+      setAdminDate({
+        year: adminDate.year,
+        month: adminDate.month + 1,
+      });
+    }
+  };
+
+  const applyPreset = (presetKey) => {
+    const preset = EVENT_PRESETS[presetKey];
+
+    if (!preset) return;
+
+    setEditingId(null);
+    setTitle(preset.title);
+    setCategory(preset.category);
+    setVenueKey(preset.venueKey);
+    setPrice(preset.price);
+    setCustomVenue("");
+    setBooking(preset.booking);
+    setDescription(preset.description || "");
+    setLineup("");
+  };
 
   if (!isOpen) return null;
 
@@ -1443,7 +1605,8 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
     setDate(evt.date);
     setTitle(evt.title);
     setCategory(evt.category || "seoul");
-    setVenueKey(evt.venueKey || "seoul");
+    setVenueKey(evt.customVenue ? "custom" : (evt.venueKey || "none"));
+    setCustomVenue(evt.customVenue || "");
     setStartTime(evt.startTime || "20:00");
     setLineup(evt.lineup ? evt.lineup.join(", ") : "");
     setPrice(evt.price || 0);
@@ -1458,6 +1621,7 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
     setCategory("seoul");
     setVenueKey("seoul");
     setStartTime("20:00");
+    setCustomVenue("");
     setLineup("김태현");
     setPrice(33000);
     setBooking("");
@@ -1472,7 +1636,8 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
       date,
       day: dayNum,
       category,
-      venueKey: venueKey === "none" ? null : venueKey,
+      venueKey: venueKey === "none" || venueKey === "custom" ? null : venueKey,
+      customVenue: venueKey === "custom" ? customVenue : "",
       title,
       startTime,
       lineup: lineup.split(',').map(s => s.trim()).filter(Boolean),
@@ -1533,6 +1698,102 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
                 {editingId ? "선택한 일정을 수정합니다." : "새로운 공연 또는 업로드 일정을 등록합니다."}
               </p>
 
+
+              {!editingId && (
+                <div className="mb-4 p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-800">
+                  <p className="text-xs font-black text-neutral-900 dark:text-white mb-3">
+                    ⚡ 빠른 일정 추가
+                  </p>
+
+                  {/* 메타코미디클럽 */}
+                  <p className="text-[11px] font-black text-neutral-700 dark:text-neutral-200 mb-2">
+                    메타코미디클럽
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("meta_assembly")}
+                      className="py-2 rounded-xl bg-orange-500 text-white text-[11px] font-bold"
+                    >
+                      스탠드업어셈블
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("meta_assembly_se")}
+                      className="py-2 rounded-xl bg-orange-500 text-white text-[11px] font-bold"
+                    >
+                      스탠드업어셈블 SE
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("meta_openmic")}
+                      className="py-2 rounded-xl bg-orange-500 text-white text-[11px] font-bold"
+                    >
+                      오픈마이크
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("meta_crowdwork")}
+                      className="py-2 rounded-xl bg-orange-500 text-white text-[11px] font-bold"
+                    >
+                      크라우드워크어셈블
+                    </button>
+                  </div>
+
+                  {/* 삼각지대 */}
+                  <p className="text-[11px] font-black text-neutral-700 dark:text-neutral-200 mb-2 mt-4">
+                    삼각지대
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("samgak_openmic")}
+                      className="py-2 rounded-xl bg-emerald-600 text-white text-[11px] font-bold"
+                    >
+                      오픈마이크
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("samgak_comedynight")}
+                      className="py-2 rounded-xl bg-emerald-600 text-white text-[11px] font-bold"
+                    >
+                      코미디나이트
+                    </button>
+                  </div>
+
+                  {/* 서울코미디클럽 */}
+                  <p className="text-[11px] font-black text-neutral-700 dark:text-neutral-200 mb-2 mt-4">
+                    서울코미디클럽
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("seoul_allstars")}
+                      className="py-2 rounded-xl bg-blue-600 text-white text-[11px] font-bold"
+                    >
+                      올스타즈
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => applyPreset("seoul_draft")}
+                      className="py-2 rounded-xl bg-blue-600 text-white text-[11px] font-bold"
+                    >
+                      드래프트
+                    </button>
+                  </div>
+                </div>
+              )}
+
+
+
               <form onSubmit={handleSubmitEvent} className="space-y-3">
                 <div>
                   <label className="block text-[11px] font-bold text-neutral-700 dark:text-neutral-300 mb-0.5">날짜</label>
@@ -1583,10 +1844,27 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
                       <option value="seoul">서울코미디클럽</option>
                       <option value="meta">메타코미디클럽 홍대</option>
                       <option value="samgak">삼각지대</option>
+                      <option value="custom">직접 입력</option>
                       <option value="none">온라인 / 기타</option>
                     </select>
                   </div>
                 </div>
+
+                {venueKey === "custom" && (
+                  <div>
+                    <label className="block text-[11px] font-bold text-neutral-700 dark:text-neutral-300 mb-0.5">
+                      장소 직접 입력
+                    </label>
+
+                    <input
+                      type="text"
+                      value={customVenue}
+                      onChange={(e) => setCustomVenue(e.target.value)}
+                      placeholder="공연장 이름 입력"
+                      className="w-full px-3 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-semibold dark:text-white"
+                    />
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
@@ -1667,8 +1945,33 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
 
             <div>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-2">등록된 일정 관리 (고정/수정/삭제)</h3>
+              <div className="flex items-center justify-between mb-3">
+                <button
+                  type="button"
+                  onClick={handleAdminPrevMonth}
+                  className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800
+               text-neutral-700 dark:text-neutral-200 font-black
+               hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
+                >
+                  ‹
+                </button>
+
+                <p className="text-sm font-black text-neutral-900 dark:text-white">
+                  {adminDate.year}년 {adminDate.month + 1}월
+                </p>
+
+                <button
+                  type="button"
+                  onClick={handleAdminNextMonth}
+                  className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800
+               text-neutral-700 dark:text-neutral-200 font-black
+               hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
+                >
+                  ›
+                </button>
+              </div>
               <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-                {events.map((evt) => {
+                {filteredAdminEvents.map((evt) => {
                   const isPinned = pinnedEventId === evt.id;
                   return (
                     <div key={evt.id} className="flex items-center justify-between p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-xs">
@@ -1680,7 +1983,9 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
                         >
                           {isPinned ? "📌 고정됨" : "📌 고정"}
                         </button>
-                        <span className="font-bold">{evt.date}</span> — <span className="text-neutral-600 dark:text-neutral-300">{evt.title}</span>
+                        <span className="font-bold">
+                          {Number(evt.date.split("-")[1])}/{Number(evt.date.split("-")[2])}
+                        </span> — <span className="text-neutral-600 dark:text-neutral-300">{evt.title}</span>
                       </div>
                       <div className="flex gap-1 shrink-0">
                         <button
@@ -1711,10 +2016,10 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
 export default function App() {
   const [mounted, setMounted] = useState(false);
 
-useEffect(() => {
-  setMounted(true);
-}, []);
-  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
 
   const [events, setEvents] = useState(INITIAL_EVENTS);
 
@@ -1729,85 +2034,92 @@ useEffect(() => {
 
   const [activeCategory, setActiveCategory] = useState("all");
   const [darkMode, setDarkMode] = useState(false);
-  const [currentDate, setCurrentDate] = useState({ year: 2026, month: 7 });
+  const [currentDate, setCurrentDate] = useState(() => {
+    const now = new Date();
+
+    return {
+      year: now.getFullYear(),
+      month: now.getMonth(),
+    };
+  });
   const [toastMessage, setToastMessage] = useState(null);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
   useEffect(() => {
-  const saved = localStorage.getItem("taehyun_events_final_v8");
+    const saved = localStorage.getItem("taehyun_events_final_v8");
 
-  if (saved) {
-    const savedEvents = JSON.parse(saved);
+    if (saved) {
+      const savedEvents = JSON.parse(saved);
 
-    // 기존 저장 일정 + INITIAL_EVENTS 합치기
-    const mergedEvents = [...savedEvents];
+      // 기존 저장 일정 + INITIAL_EVENTS 합치기
+      const mergedEvents = [...savedEvents];
 
-    INITIAL_EVENTS.forEach((newEvent) => {
-      const exists = mergedEvents.some(
-        (savedEvent) => savedEvent.id === newEvent.id
-      );
+      INITIAL_EVENTS.forEach((newEvent) => {
+        const exists = mergedEvents.some(
+          (savedEvent) => savedEvent.id === newEvent.id
+        );
 
-      if (!exists) {
-        mergedEvents.push(newEvent);
-      }
-    });
+        if (!exists) {
+          mergedEvents.push(newEvent);
+        }
+      });
 
-    setEvents(mergedEvents);
-  }
-
-  setEventsLoaded(true);
-}, []);
-
-
-useEffect(() => {
-  const loadEventsFromFirebase = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "events"));
-
-      const firebaseEvents = snapshot.docs
-  .map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }))
-  .filter((event) => event.date);
-
-     if (firebaseEvents.length > 0) {
-  setEvents((prev) => {
-    const merged = [...prev];
-
-    firebaseEvents.forEach((firebaseEvent) => {
-      const index = merged.findIndex(
-        (event) => event.id === firebaseEvent.id
-      );
-
-      if (index !== -1) {
-        // 같은 ID가 있으면 Firebase 최신 데이터로 교체
-        merged[index] = firebaseEvent;
-      } else {
-        // 새로운 일정이면 추가
-        merged.push(firebaseEvent);
-      }
-    });
-
-    return merged;
-  });
-}
-    } catch (error) {
-      console.error("Firebase 일정 불러오기 오류:", error);
+      setEvents(mergedEvents);
     }
-  };
 
-  loadEventsFromFirebase();
-}, []);
+    setEventsLoaded(true);
+  }, []);
 
-useEffect(() => {
-  if (!eventsLoaded) return;
 
-  localStorage.setItem(
-    "taehyun_events_final_v8",
-    JSON.stringify(events)
-  );
-}, [events, eventsLoaded]);
+  useEffect(() => {
+    const loadEventsFromFirebase = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "events"));
+
+        const firebaseEvents = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((event) => event.date);
+
+        if (firebaseEvents.length > 0) {
+          setEvents((prev) => {
+            const merged = [...prev];
+
+            firebaseEvents.forEach((firebaseEvent) => {
+              const index = merged.findIndex(
+                (event) => event.id === firebaseEvent.id
+              );
+
+              if (index !== -1) {
+                // 같은 ID가 있으면 Firebase 최신 데이터로 교체
+                merged[index] = firebaseEvent;
+              } else {
+                // 새로운 일정이면 추가
+                merged.push(firebaseEvent);
+              }
+            });
+
+            return merged;
+          });
+        }
+      } catch (error) {
+        console.error("Firebase 일정 불러오기 오류:", error);
+      }
+    };
+
+    loadEventsFromFirebase();
+  }, []);
+
+  useEffect(() => {
+    if (!eventsLoaded) return;
+
+    localStorage.setItem(
+      "taehyun_events_final_v8",
+      JSON.stringify(events)
+    );
+  }, [events, eventsLoaded]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -1869,131 +2181,131 @@ useEffect(() => {
   };
 
   const handleAddEvent = async (newEvt) => {
-  try {
-    const docRef = await addDoc(collection(db, "events"), newEvt);
-
-    const savedEvent = {
-      ...newEvt,
-      id: docRef.id,
-    };
-
-    setEvents((prev) => [savedEvent, ...prev]);
-
-    showToast("새로운 일정이 추가되었습니다! 🎉");
-  } catch (error) {
-    console.error("Firebase 저장 오류:", error);
-    showToast("Firebase 저장에 실패했습니다.");
-  }
-};
-
-  const handleUpdateEvent = async (updatedEvt) => {
-  try {
-    await setDoc(
-      doc(db, "events", updatedEvt.id),
-      updatedEvt
-    );
-
-    setEvents((prev) =>
-      prev.map((e) =>
-        e.id === updatedEvt.id ? updatedEvt : e
-      )
-    );
-
-    showToast("일정이 수정되었습니다! ✨");
-  } catch (error) {
-    console.error("Firebase 수정 오류:", error);
-    showToast("Firebase 수정에 실패했습니다.");
-  }
-};
-
-  const handleDeleteEvent = async (eventId) => {
-  try {
-    // 1. eventId와 같은 문서 ID가 있으면 삭제
-    const directRef = doc(db, "events", eventId);
-
     try {
-      await deleteDoc(directRef);
+      const docRef = await addDoc(collection(db, "events"), newEvt);
+
+      const savedEvent = {
+        ...newEvt,
+        id: docRef.id,
+      };
+
+      setEvents((prev) => [savedEvent, ...prev]);
+
+      showToast("새로운 일정이 추가되었습니다! 🎉");
     } catch (error) {
-      console.log("직접 삭제 실패, id 필드로 검색합니다.");
-    }
-
-    // 2. 문서 ID가 다른 기존 일정이면
-    // 문서 안의 id 필드로 찾아서 삭제
-    const q = query(
-      collection(db, "events"),
-      where("id", "==", eventId)
-    );
-
-    const snapshot = await getDocs(q);
-
-    for (const document of snapshot.docs) {
-      await deleteDoc(document.ref);
-    }
-
-    // 3. 화면에서도 삭제
-    setEvents((prev) => prev.filter((e) => e.id !== eventId));
-
-    // 4. 고정 일정이었다면 고정 해제
-    if (pinnedEventId === eventId) {
-      setPinnedEventId(null);
-    }
-
-    showToast("일정이 삭제되었습니다.");
-  } catch (error) {
-    console.error("Firebase 삭제 오류:", error);
-    showToast("Firebase 삭제에 실패했습니다.");
-  }
-};
-  useEffect(() => {
-  const loadPinnedEvent = async () => {
-    try {
-      const snapshot = await getDocs(
-        collection(db, "settings")
-      );
-
-      const mainDoc = snapshot.docs.find(
-        (item) => item.id === "main"
-      );
-
-      if (mainDoc) {
-        const data = mainDoc.data();
-
-        if (data.pinnedEventId) {
-          setPinnedEventId(data.pinnedEventId);
-        }
-      }
-    } catch (error) {
-      console.error("Next Show 불러오기 오류:", error);
+      console.error("Firebase 저장 오류:", error);
+      showToast("Firebase 저장에 실패했습니다.");
     }
   };
 
-  loadPinnedEvent();
-}, []);
+  const handleUpdateEvent = async (updatedEvt) => {
+    try {
+      await setDoc(
+        doc(db, "events", updatedEvt.id),
+        updatedEvt
+      );
+
+      setEvents((prev) =>
+        prev.map((e) =>
+          e.id === updatedEvt.id ? updatedEvt : e
+        )
+      );
+
+      showToast("일정이 수정되었습니다! ✨");
+    } catch (error) {
+      console.error("Firebase 수정 오류:", error);
+      showToast("Firebase 수정에 실패했습니다.");
+    }
+  };
+
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      // 1. eventId와 같은 문서 ID가 있으면 삭제
+      const directRef = doc(db, "events", eventId);
+
+      try {
+        await deleteDoc(directRef);
+      } catch (error) {
+        console.log("직접 삭제 실패, id 필드로 검색합니다.");
+      }
+
+      // 2. 문서 ID가 다른 기존 일정이면
+      // 문서 안의 id 필드로 찾아서 삭제
+      const q = query(
+        collection(db, "events"),
+        where("id", "==", eventId)
+      );
+
+      const snapshot = await getDocs(q);
+
+      for (const document of snapshot.docs) {
+        await deleteDoc(document.ref);
+      }
+
+      // 3. 화면에서도 삭제
+      setEvents((prev) => prev.filter((e) => e.id !== eventId));
+
+      // 4. 고정 일정이었다면 고정 해제
+      if (pinnedEventId === eventId) {
+        setPinnedEventId(null);
+      }
+
+      showToast("일정이 삭제되었습니다.");
+    } catch (error) {
+      console.error("Firebase 삭제 오류:", error);
+      showToast("Firebase 삭제에 실패했습니다.");
+    }
+  };
+  useEffect(() => {
+    const loadPinnedEvent = async () => {
+      try {
+        const snapshot = await getDocs(
+          collection(db, "settings")
+        );
+
+        const mainDoc = snapshot.docs.find(
+          (item) => item.id === "main"
+        );
+
+        if (mainDoc) {
+          const data = mainDoc.data();
+
+          if (data.pinnedEventId) {
+            setPinnedEventId(data.pinnedEventId);
+          }
+        }
+      } catch (error) {
+        console.error("Next Show 불러오기 오류:", error);
+      }
+    };
+
+    loadPinnedEvent();
+  }, []);
 
   const handleTogglePin = async (eventId) => {
-  try {
-    const newPinnedId = pinnedEventId === eventId ? null : eventId;
+    try {
+      const newPinnedId = pinnedEventId === eventId ? null : eventId;
 
-    await setDoc(
-      doc(db, "settings", "main"),
-      {
-        pinnedEventId: newPinnedId,
-      },
-      { merge: true }
-    );
+      await setDoc(
+        doc(db, "settings", "main"),
+        {
+          pinnedEventId: newPinnedId,
+        },
+        { merge: true }
+      );
 
-    setPinnedEventId(newPinnedId);
+      setPinnedEventId(newPinnedId);
 
-    if (newPinnedId === null) {
-      showToast("Next Show 고정이 해제되었습니다.");
-    } else {
-      showToast("선택한 일정이 Next Show로 고정되었습니다! 📌");
+      if (newPinnedId === null) {
+        showToast("Next Show 고정이 해제되었습니다.");
+      } else {
+        showToast("선택한 일정이 Next Show로 고정되었습니다! 📌");
+      }
+    } catch (error) {
+      console.error("Next Show 저장 오류:", error);
+      showToast("Next Show 저장에 실패했습니다.");
     }
-  } catch (error) {
-    console.error("Next Show 저장 오류:", error);
-    showToast("Next Show 저장에 실패했습니다.");
-  }
-};
+  };
 
   const sortedEvents = useMemo(() => {
     return [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -2032,14 +2344,14 @@ useEffect(() => {
 
         <div className="max-w-md mx-auto w-full">
           {mounted && (
-  <Header
-    nextShow={nextShow}
-    onShare={handleShare}
-    darkMode={darkMode}
-    setDarkMode={setDarkMode}
-    profileImage="/image.jpg"
-  />
-)}
+            <Header
+              nextShow={nextShow}
+              onShare={handleShare}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+              profileImage="/image.jpg"
+            />
+          )}
 
           <Calendar
             events={filteredEvents}
