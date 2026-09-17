@@ -1326,16 +1326,26 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 
 
   const eventsByDay = useMemo(() => {
-    const map = {};
-    events.forEach((evt) => {
-      const [eYear, eMonth, eDay] = evt.date.split('-').map(Number);
-      if (eYear === year && eMonth === month + 1) {
-        if (!map[eDay]) map[eDay] = [];
-        map[eDay].push(evt);
-      }
-    });
-    return map;
-  }, [events, year, month]);
+  const map = {};
+
+  events.forEach((evt) => {
+    const [eYear, eMonth, eDay] = evt.date.split('-').map(Number);
+
+    if (eYear === year && eMonth === month + 1) {
+      if (!map[eDay]) map[eDay] = [];
+      map[eDay].push(evt);
+    }
+  });
+
+  // 같은 날짜의 일정은 시작 시간 빠른 순으로 정렬
+  Object.values(map).forEach((dayEvents) => {
+    dayEvents.sort((a, b) =>
+      (a.startTime || "23:59").localeCompare(b.startTime || "23:59")
+    );
+  });
+
+  return map;
+}, [events, year, month]);
 
   const today = new Date();
   const currentDay = today.getDate();
