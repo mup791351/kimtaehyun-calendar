@@ -880,8 +880,14 @@ export default function App() {
     setMounted(true);
   }, []);
 
-
-  const { events, setEvents, eventsLoaded } = useEvents(INITIAL_EVENTS);
+  const {
+  events,
+  setEvents,
+  eventsLoaded,
+  addEvent,
+  updateEvent,
+  deleteEvent,
+} = useEvents(INITIAL_EVENTS);
 
   const [pinnedEventId, setPinnedEventId] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -965,92 +971,38 @@ export default function App() {
   };
 
   const handleAddEvent = async (newEvt) => {
-    try {
-      await setDoc(
-        doc(db, "events", newEvt.id),
-        newEvt
-      );
+  const success = await addEvent(newEvt);
 
-      setEvents((prev) => {
-        const exists = prev.some((event) => event.id === newEvt.id);
-
-        if (exists) {
-          return prev.map((event) =>
-            event.id === newEvt.id ? newEvt : event
-          );
-        }
-
-        return [newEvt, ...prev];
-      });
-
-      showToast("새로운 일정이 추가되었습니다! 🎉");
-    } catch (error) {
-      console.error("Firebase 저장 오류:", error);
-      showToast("Firebase 저장에 실패했습니다.");
-    }
-  };
-
-  const handleUpdateEvent = async (updatedEvt) => {
-    try {
-      await setDoc(
-        doc(db, "events", updatedEvt.id),
-        updatedEvt
-      );
-
-      setEvents((prev) =>
-        prev.map((e) =>
-          e.id === updatedEvt.id ? updatedEvt : e
-        )
-      );
-
-      showToast("일정이 수정되었습니다! ✨");
-    } catch (error) {
-      console.error("Firebase 수정 오류:", error);
-      showToast("Firebase 수정에 실패했습니다.");
-    }
-  };
-
-  const handleDeleteEvent = async (eventId) => {
-  try {
-    // 예전 방식으로 중복 생성된 문서가 있으면 먼저 정리
-    const q = query(
-      collection(db, "events"),
-      where("id", "==", eventId)
-    );
-
-    const snapshot = await getDocs(q);
-
-    for (const document of snapshot.docs) {
-      if (document.id !== eventId) {
-        await deleteDoc(document.ref);
-      }
-    }
-
-    // 삭제된 일정이라는 기록을 events 안에 남김
-    await setDoc(
-      doc(db, "events", eventId),
-      {
-        id: eventId,
-        deleted: true,
-        deletedAt: new Date().toISOString(),
-      }
-    );
-
-    // 화면에서 제거
-    setEvents((prev) =>
-      prev.filter((e) => e.id !== eventId)
-    );
-
-    // Next Show 고정 일정이었다면 해제
-    if (pinnedEventId === eventId) {
-      setPinnedEventId(null);
-    }
-
-    showToast("일정이 삭제되었습니다.");
-  } catch (error) {
-    console.error("Firebase 삭제 오류:", error);
-    showToast("Firebase 삭제에 실패했습니다.");
+  if (success) {
+    showToast("새로운 일정이 추가되었습니다! 🎉");
+  } else {
+    showToast("Firebase 저장에 실패했습니다.");
   }
+};
+
+const handleUpdateEvent = async (updatedEvt) => {
+  const success = await updateEvent(updatedEvt);
+
+  if (success) {
+    showToast("일정이 수정되었습니다! ✨");
+  } else {
+    showToast("Firebase 수정에 실패했습니다.");
+  }
+};
+
+const handleDeleteEvent = async (eventId) => {
+  const success = await deleteEvent(eventId);
+
+  if (!success) {
+    showToast("Firebase 삭제에 실패했습니다.");
+    return;
+  }
+
+  if (pinnedEventId === eventId) {
+    setPinnedEventId(null);
+  }
+
+  showToast("일정이 삭제되었습니다.");
 };
   useEffect(() => {
     const loadPinnedEvent = async () => {
