@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { auth } from "../lib/firebase";
+import { db, auth } from "../lib/firebase";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -173,6 +179,61 @@ const handleLogout = async () => {
   }
 };
 
+
+const handleBackup = async () => {
+  try {
+    // Firebase의 모든 일정 문서 읽기
+    const snapshot = await getDocs(
+      collection(db, "events")
+    );
+
+    // NEXT SHOW 고정 설정 읽기
+    const settingsSnapshot = await getDoc(
+      doc(db, "settings", "main")
+    );
+
+    const backup = {
+      exportedAt: new Date().toISOString(),
+
+      events: snapshot.docs.map((document) => ({
+        documentId: document.id,
+        data: document.data(),
+      })),
+
+      settings: settingsSnapshot.exists()
+        ? {
+            documentId: settingsSnapshot.id,
+            data: settingsSnapshot.data(),
+          }
+        : null,
+    };
+
+    const json = JSON.stringify(backup, null, 2);
+
+    const blob = new Blob([json], {
+      type: "application/json",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = `kimtaehyun-backup-${new Date()
+      .toISOString()
+      .slice(0, 10)}.json`;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("백업 오류:", error);
+    alert("Firebase 백업에 실패했습니다.");
+  }
+};
+
+
   const handleStartEdit = (evt) => {
     setEditingId(evt.id);
     setDate(evt.date);
@@ -285,6 +346,13 @@ const handleLogout = async () => {
   >
     로그아웃
   </button>
+  <button
+  type="button"
+  onClick={handleBackup}
+  className="text-xs text-blue-400 hover:text-blue-300"
+>
+  Firebase 일정 백업 ↓
+</button>
 </div>
             <div>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">
