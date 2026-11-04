@@ -298,6 +298,97 @@ const handleMigrationPreview = async () => {
 };
 
 
+const handleMigrateEvents = async () => {
+  if (!auth.currentUser) {
+    alert("관리자 로그인 후 실행해 주세요.");
+    return;
+  }
+
+  try {
+    // 현재 Firestore 데이터 다시 확인
+    const snapshot = await getDocs(collection(db, "events"));
+
+    const existingDocs = snapshot.docs.map((item) => ({
+      documentId: item.id,
+      ...item.data(),
+    }));
+
+    const existingIds = new Set(
+      existingDocs.flatMap((event) =>
+        [event.documentId, event.id].filter(Boolean)
+      )
+    );
+
+    const missingEvents = INITIAL_EVENTS.filter((event) => {
+      if (existingIds.has(event.id)) return false;
+
+      const duplicate = existingDocs.some((existing) =>
+        existing.deleted !== true &&
+        existing.date === event.date &&
+        existing.startTime === event.startTime
+      );
+
+      return !duplicate;
+    });
+
+    if (missingEvents.length === 0) {
+      alert("이전할 일정이 없습니다.");
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `${missingEvents.length}개 일정을 Firestore에 추가할까요?\n\n` +
+      "기존 문서는 덮어쓰지 않습니다.\n" +
+      "실행 전에 최신 백업을 보관했는지 확인해 주세요."
+    );
+
+    if (!confirmed) return;
+
+    let added = 0;
+    let skipped = 0;
+
+    for (const event of missingEvents) {
+      const eventRef = doc(db, "events", event.id);
+
+      // 해당 ID가 존재하면 쓰지 않는 트랜잭션
+      const created = await runTransaction(
+        db,
+        async (transaction) => {
+          const existing = await transaction.get(eventRef);
+
+          if (existing.exists()) {
+            return false;
+          }
+
+          transaction.set(eventRef, event);
+          return true;
+        }
+      );
+
+      if (created) {
+        added++;
+      } else {
+        skipped++;
+      }
+    }
+
+    alert(
+      `이전 완료!\n\n` +
+      `추가: ${added}개\n` +
+      `건너뜀: ${skipped}개\n\n` +
+      "이전 대상 확인 버튼을 다시 눌러 검증해 주세요."
+    );
+  } catch (error) {
+    console.error("일정 이전 오류:", error);
+
+    alert(
+      "이전 도중 오류가 발생했습니다.\n" +
+      "일부 일정은 이미 추가되었을 수 있습니다.\n" +
+      "다시 실행하기 전에 이전 대상 확인을 해주세요."
+    );
+  }
+};
+
 
   const handleStartEdit = (evt) => {
     setEditingId(evt.id);
@@ -426,6 +517,14 @@ const handleMigrationPreview = async () => {
   className="px-3 py-2 rounded-lg border border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700 text-xs font-medium"
 >
   이전 대상 확인
+</button>
+
+<button
+  type="button"
+  onClick={handleMigrateEvents}
+  className="px-3 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 text-xs font-bold"
+>
+  Firebase로 이전
 </button>
 </div>
             <div>
