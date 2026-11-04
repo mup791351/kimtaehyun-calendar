@@ -1631,21 +1631,6 @@ useEffect(() => {
   setErrorMsg("");
   setLoginLoading(true);
 
-  const handleLogout = async () => {
-  try {
-    await signOut(auth);
-
-    setIsAdminLoggedIn(false);
-    setEmail("");
-    setPassword("");
-    setErrorMsg("");
-
-    onClose();
-  } catch (error) {
-    setErrorMsg("로그아웃에 실패했습니다.");
-  }
-};
-
   try {
     const credential = await signInWithEmailAndPassword(
       auth,
@@ -1665,6 +1650,21 @@ useEffect(() => {
     setErrorMsg("이메일 또는 비밀번호를 확인해주세요.");
   } finally {
     setLoginLoading(false);
+  }
+};
+
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+
+    setIsAdminLoggedIn(false);
+    setEmail("");
+    setPassword("");
+    setErrorMsg("");
+
+    onClose();
+  } catch (error) {
+    setErrorMsg("로그아웃에 실패했습니다.");
   }
 };
 
