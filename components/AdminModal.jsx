@@ -63,6 +63,7 @@ useEffect(() => {
 }, []);
 
   const [editingId, setEditingId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const [date, setDate] = useState(getTodayDate);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("seoul");
@@ -241,6 +242,7 @@ const handleBackup = async () => {
 
 
   const handleStartEdit = (evt) => {
+    setShowForm(true);
     setEditingId(evt.id);
     setDate(evt.date);
     setTitle(evt.title);
@@ -266,6 +268,9 @@ const handleBackup = async () => {
     setPrice(33000);
     setBooking("");
     setDescription("");
+     if (standalone) {
+    setShowForm(false);
+  }
   };
 
   const handleSubmitEvent = (e) => {
@@ -358,7 +363,7 @@ const handleBackup = async () => {
             </form>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className={standalone ? "flex flex-col gap-5" : "space-y-6"}>
             <div className="flex items-center justify-end gap-2 mt-6 mb-4">
   <button
     type="button"
@@ -378,7 +383,11 @@ const handleBackup = async () => {
 
 
 </div>
-            <div>
+            <div className={
+  standalone
+    ? `order-2 ${showForm ? "" : "hidden"}`
+    : ""
+}>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">
                 {editingId ? "일정 수정하기" : "새 일정 추가"}
               </h3>
@@ -631,8 +640,30 @@ const handleBackup = async () => {
 
             <hr className="border-neutral-200 dark:border-neutral-800" />
 
-            <div>
-              <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-2">등록된 일정 관리 (고정/수정/삭제)</h3>
+            <div className={standalone ? "order-1" : ""}>
+              
+<div className="flex items-center justify-between gap-3 mb-4">
+  <h3 className="text-lg font-bold text-neutral-900 dark:text-white">
+    등록된 일정
+  </h3>
+
+  {standalone && (
+    <button
+      type="button"
+      onClick={() => {
+        handleCancelEdit();
+        if (standalone) {
+  setShowForm(false);
+}
+        setShowForm(true);
+      }}
+      className="shrink-0 rounded-lg bg-neutral-900 px-4 py-2.5 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900"
+    >
+      + 일정 추가
+    </button>
+  )}
+</div>
+
               <div className="flex items-center justify-between mb-3">
                 <button
                   type="button"
