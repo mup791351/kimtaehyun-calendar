@@ -122,6 +122,7 @@ export default function AdminPage() {
         )}
 
         <AdminModal
+          standalone
           isOpen={eventsLoaded}
           onClose={() => router.push("/")}
           events={events}

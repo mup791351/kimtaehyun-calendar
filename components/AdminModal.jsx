@@ -44,7 +44,7 @@ const getTodayDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-export default function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePin }) {
+export default function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePinstandalone = false, }) {
   const ADMIN_UID = "C5nNrpbLzye3VWuaTLr8Wy82Ydo2";
 
 const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
@@ -294,14 +294,29 @@ const handleBackup = async () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm">
-      <div className="bg-white dark:bg-neutral-900 rounded-3xl p-5 max-w-sm w-full shadow-2xl border border-neutral-100 dark:border-neutral-800 relative max-h-[90vh] overflow-y-auto">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500"
-        >
-          <XMark className="w-4 h-4" />
-        </button>
+    
+<div
+  className={
+    standalone
+      ? "w-full"
+      : "fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm"
+  }
+>
+  <div
+    className={
+      standalone
+        ? "w-full rounded-2xl bg-white p-5 text-neutral-900 dark:bg-neutral-900 dark:text-white"
+        : "bg-white dark:bg-neutral-900 rounded-3xl p-5 max-w-sm w-full shadow-2xl border border-neutral-100 dark:border-neutral-800 relative max-h-[90vh] overflow-y-auto"
+    }
+  >
+        {!standalone && (
+  <button
+    onClick={onClose}
+    className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500"
+  >
+    <XMark className="w-4 h-4" />
+  </button>
+)}
 
         {!isAdminLoggedIn ? (
           <div>
