@@ -2,7 +2,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  query,
+  where,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../lib/firebase";
 
 export default function useEvents(initialEvents) {
@@ -84,5 +92,88 @@ export default function useEvents(initialEvents) {
     );
   }, [events, eventsLoaded]);
 
-  return { events, setEvents, eventsLoaded };
+  
+const addEvent = async (newEvt) => {
+  try {
+    await setDoc(doc(db, "events", newEvt.id), newEvt);
+
+    setEvents((prev) => {
+      const exists = prev.some((e) => e.id === newEvt.id);
+
+      if (exists) {
+        return prev.map((e) =>
+          e.id === newEvt.id ? newEvt : e
+        );
+      }
+
+      return [newEvt, ...prev];
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Firebase 저장 오류:", error);
+    return false;
+  }
+};
+
+const updateEvent = async (updatedEvt) => {
+  try {
+    await setDoc(
+      doc(db, "events", updatedEvt.id),
+      updatedEvt
+    );
+
+    setEvents((prev) =>
+      prev.map((e) =>
+        e.id === updatedEvt.id ? updatedEvt : e
+      )
+    );
+
+    return true;
+  } catch (error) {
+    console.error("Firebase 수정 오류:", error);
+    return false;
+  }
+};
+
+const deleteEvent = async (eventId) => {
+  try {
+    const q = query(
+      collection(db, "events"),
+      where("id", "==", eventId)
+    );
+
+    const snapshot = await getDocs(q);
+
+    for (const document of snapshot.docs) {
+      if (document.id !== eventId) {
+        await deleteDoc(document.ref);
+      }
+    }
+
+    await setDoc(doc(db, "events", eventId), {
+      id: eventId,
+      deleted: true,
+      deletedAt: new Date().toISOString(),
+    });
+
+    setEvents((prev) =>
+      prev.filter((e) => e.id !== eventId)
+    );
+
+    return true;
+  } catch (error) {
+    console.error("Firebase 삭제 오류:", error);
+    return false;
+  }
+};
+
+  return {
+  events,
+  setEvents,
+  eventsLoaded,
+  addEvent,
+  updateEvent,
+  deleteEvent,
+};
 }
