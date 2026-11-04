@@ -6,7 +6,7 @@ import { VENUES } from "../lib/venues";
 
 import Calendar from "../components/Calendar";
 import VenueInfoCards from "../components/VenueInfoCards";
-import AdminModal from "../components/AdminModal";
+
 
 import useEvents from "../hooks/useEvents";
 import usePinnedEvent from "../hooks/usePinnedEvent";
@@ -447,30 +447,13 @@ const handleTogglePin = async (eventId) => {
           <VenueInfoCards />
         </div>
 
-        {/* Admin Button placed at the very bottom */}
-        <div className="max-w-md mx-auto w-full mt-6 text-center">
-          <button
-            onClick={() => setIsAdminModalOpen(true)}
-            className="text-[11px] font-semibold text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 underline underline-offset-4 py-2 transition"
-          >
-            ⚙️ 관리자 설정
-          </button>
-        </div>
+
 
         <footer className="mt-6 mb-2 text-center text-[10px] text-neutral-400 font-semibold space-y-0.5">
           <p>© 2026 KIM TAE HYUN. All rights reserved.</p>
         </footer>
 
-        <AdminModal
-          isOpen={isAdminModalOpen}
-          onClose={() => setIsAdminModalOpen(false)}
-          events={sortedEvents}
-          onAddEvent={handleAddEvent}
-          onUpdateEvent={handleUpdateEvent}
-          onDeleteEvent={handleDeleteEvent}
-          pinnedEventId={pinnedEventId}
-          onTogglePin={handleTogglePin}
-        />
+        
       </div>
     </div>
   );
