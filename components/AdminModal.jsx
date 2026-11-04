@@ -1,6 +1,6 @@
 "use client";
 
-import { INITIAL_EVENTS } from "../lib/initialEvents";
+
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../lib/firebase";
 import {
@@ -8,7 +8,7 @@ import {
   getDocs,
   getDoc,
   doc,
-  
+
 } from "firebase/firestore";
 import {
   signInWithEmailAndPassword,
