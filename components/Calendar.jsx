@@ -162,12 +162,21 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   const handlePrevMonth = () => {
-    if (month === 0) {
-      setCurrentDate({ year: year - 1, month: 11 });
-    } else {
-      setCurrentDate({ year, month: month - 1 });
-    }
-  };
+  const today = new Date();
+
+  if (
+    year < today.getFullYear() ||
+    (year === today.getFullYear() && month <= today.getMonth())
+  ) {
+    return;
+  }
+
+  if (month === 0) {
+    setCurrentDate({ year: year - 1, month: 11 });
+  } else {
+    setCurrentDate({ year, month: month - 1 });
+  }
+};
 
   const handleNextMonth = () => {
     if (month === 11) {
@@ -215,11 +224,16 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
       <section id="calendar" className="rounded-2xl bg-[#111111] p-3 sm:p-5 shadow-sm border border-neutral-800 my-3 overflow-hidden">
         <div className="flex items-center justify-between mb-4">
           <button
-            onClick={handlePrevMonth}
-            className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800"
-          >
-            ‹
-          </button>
+  onClick={handlePrevMonth}
+  disabled={
+    year < new Date().getFullYear() ||
+    (year === new Date().getFullYear() &&
+      month <= new Date().getMonth())
+  }
+  className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800 disabled:opacity-20 disabled:cursor-not-allowed"
+>
+  ‹
+</button>
           <div className="text-center">
             <h2 className="text-base sm:text-xl font-black text-white">
               {month + 1}월
