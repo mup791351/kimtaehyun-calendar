@@ -1,5 +1,6 @@
 "use client";
 
+import { INITIAL_EVENTS } from "../lib/initialEvents";
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../lib/firebase";
 import {
@@ -234,6 +235,70 @@ const handleBackup = async () => {
 };
 
 
+const handleMigrationPreview = async () => {
+  try {
+    const snapshot = await getDocs(collection(db, "events"));
+
+    const existingDocs = snapshot.docs.map((item) => ({
+      documentId: item.id,
+      ...item.data(),
+    }));
+
+    const existingIds = new Set(
+      existingDocs.flatMap((event) => [
+        event.documentId,
+        event.id,
+      ].filter(Boolean))
+    );
+
+    const missingEvents = INITIAL_EVENTS.filter((event) => {
+      if (existingIds.has(event.id)) return false;
+
+      const duplicate = existingDocs.some((existing) =>
+        existing.deleted !== true &&
+        existing.date === event.date &&
+        existing.startTime === event.startTime
+      );
+
+      return !duplicate;
+    });
+
+    const result = {
+      checkedAt: new Date().toISOString(),
+      totalInitialEvents: INITIAL_EVENTS.length,
+      missingCount: missingEvents.length,
+      missingEvents,
+    };
+
+    const blob = new Blob(
+      [JSON.stringify(result, null, 2)],
+      { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "kimtaehyun-migration-preview.json";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    alert(
+      `확인 완료!\n이전 대상: ${missingEvents.length}개\n\n` +
+      "미리보기 JSON 파일이 다운로드되었습니다.\n" +
+      "Firebase 데이터는 변경하지 않았습니다."
+    );
+  } catch (error) {
+    console.error("이전 대상 확인 오류:", error);
+    alert("이전 대상 확인에 실패했습니다.");
+  }
+};
+
+
+
   const handleStartEdit = (evt) => {
     setEditingId(evt.id);
     setDate(evt.date);
@@ -354,6 +419,14 @@ const handleBackup = async () => {
   >
     로그아웃
   </button>
+
+  <button
+  type="button"
+  onClick={handleMigrationPreview}
+  className="px-3 py-2 rounded-lg border border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700 text-xs font-medium"
+>
+  이전 대상 확인
+</button>
 </div>
             <div>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">
