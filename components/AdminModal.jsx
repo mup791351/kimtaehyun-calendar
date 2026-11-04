@@ -44,7 +44,7 @@ const getTodayDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-export default function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePinstandalone = false, }) {
+export default function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePin, standalone = false, }) {
   const ADMIN_UID = "C5nNrpbLzye3VWuaTLr8Wy82Ydo2";
 
 const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
