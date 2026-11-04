@@ -1631,6 +1631,21 @@ useEffect(() => {
   setErrorMsg("");
   setLoginLoading(true);
 
+  const handleLogout = async () => {
+  try {
+    await signOut(auth);
+
+    setIsAdminLoggedIn(false);
+    setEmail("");
+    setPassword("");
+    setErrorMsg("");
+
+    onClose();
+  } catch (error) {
+    setErrorMsg("로그아웃에 실패했습니다.");
+  }
+};
+
   try {
     const credential = await signInWithEmailAndPassword(
       auth,
@@ -1757,6 +1772,15 @@ useEffect(() => {
           </div>
         ) : (
           <div className="space-y-6">
+            <div className="flex justify-end">
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="text-xs text-neutral-400 hover:text-red-500 transition-colors"
+  >
+    로그아웃
+  </button>
+</div>
             <div>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">
                 {editingId ? "일정 수정하기" : "새 일정 추가"}
