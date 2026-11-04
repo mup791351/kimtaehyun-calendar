@@ -8,7 +8,7 @@ import {
   getDocs,
   getDoc,
   doc,
-  unTransaction,
+  runTransaction,
 } from "firebase/firestore";
 import {
   signInWithEmailAndPassword,
