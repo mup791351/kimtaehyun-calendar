@@ -24,6 +24,7 @@ import Calendar from "../components/Calendar";
 import VenueInfoCards from "../components/VenueInfoCards";
 import AdminModal from "../components/AdminModal";
 import useEvents from "../hooks/useEvents";
+import usePinnedEvent from "../hooks/usePinnedEvent";
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
@@ -889,12 +890,12 @@ export default function App() {
   deleteEvent,
 } = useEvents(INITIAL_EVENTS);
 
-  const [pinnedEventId, setPinnedEventId] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('taehyun_pinned_event_id') || null;
-    }
-    return null;
-  });
+  const {
+  pinnedEventId,
+  pinnedLoaded,
+  togglePin,
+  clearPin,
+} = usePinnedEvent();
 
   const [activeCategory, setActiveCategory] = useState("all");
   const [darkMode, setDarkMode] = useState(false);
@@ -911,15 +912,7 @@ export default function App() {
 
 
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (pinnedEventId) {
-        localStorage.setItem('taehyun_pinned_event_id', pinnedEventId);
-      } else {
-        localStorage.removeItem('taehyun_pinned_event_id');
-      }
-    }
-  }, [pinnedEventId]);
+
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -999,61 +992,32 @@ const handleDeleteEvent = async (eventId) => {
   }
 
   if (pinnedEventId === eventId) {
-    setPinnedEventId(null);
+  const cleared = await clearPin();
+
+  if (!cleared) {
+    showToast("일정은 삭제됐지만 Next Show 고정 해제에 실패했습니다.");
+    return;
   }
+}
 
   showToast("일정이 삭제되었습니다.");
 };
-  useEffect(() => {
-    const loadPinnedEvent = async () => {
-      try {
-        const snapshot = await getDocs(
-          collection(db, "settings")
-        );
+  
 
-        const mainDoc = snapshot.docs.find(
-          (item) => item.id === "main"
-        );
+const handleTogglePin = async (eventId) => {
+  const result = await togglePin(eventId);
 
-        if (mainDoc) {
-          const data = mainDoc.data();
+  if (!result.success) {
+    showToast("Next Show 저장에 실패했습니다.");
+    return;
+  }
 
-          if (data.pinnedEventId) {
-            setPinnedEventId(data.pinnedEventId);
-          }
-        }
-      } catch (error) {
-        console.error("Next Show 불러오기 오류:", error);
-      }
-    };
-
-    loadPinnedEvent();
-  }, []);
-
-  const handleTogglePin = async (eventId) => {
-    try {
-      const newPinnedId = pinnedEventId === eventId ? null : eventId;
-
-      await setDoc(
-        doc(db, "settings", "main"),
-        {
-          pinnedEventId: newPinnedId,
-        },
-        { merge: true }
-      );
-
-      setPinnedEventId(newPinnedId);
-
-      if (newPinnedId === null) {
-        showToast("Next Show 고정이 해제되었습니다.");
-      } else {
-        showToast("선택한 일정이 Next Show로 고정되었습니다! 📌");
-      }
-    } catch (error) {
-      console.error("Next Show 저장 오류:", error);
-      showToast("Next Show 저장에 실패했습니다.");
-    }
-  };
+  if (result.pinned) {
+    showToast("선택한 일정이 Next Show로 고정되었습니다! 📌");
+  } else {
+    showToast("Next Show 고정이 해제되었습니다.");
+  }
+};
 
   const sortedEvents = useMemo(() => {
     return [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
