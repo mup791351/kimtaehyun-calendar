@@ -17,6 +17,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { VENUES } from "../lib/venues";
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
