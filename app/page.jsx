@@ -23,6 +23,7 @@ import { CATEGORY_COLORS } from "../lib/categoryColors";
 import Calendar from "../components/Calendar";
 import VenueInfoCards from "../components/VenueInfoCards";
 import AdminModal from "../components/AdminModal";
+import useEvents from "../hooks/useEvents";
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
@@ -880,9 +881,7 @@ export default function App() {
   }, []);
 
 
-  const [events, setEvents] = useState(INITIAL_EVENTS);
-
-  const [eventsLoaded, setEventsLoaded] = useState(false);
+  const { events, setEvents, eventsLoaded } = useEvents(INITIAL_EVENTS);
 
   const [pinnedEventId, setPinnedEventId] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -905,94 +904,6 @@ export default function App() {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
 
-
-
-  useEffect(() => {
-    const loadEventsFromFirebase = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, "events"));
-        const deletedIds = new Set(
-          snapshot.docs
-            .filter((docSnap) => docSnap.data().deleted === true)
-            .map((docSnap) => docSnap.data().id || docSnap.id)
-        );
-
-        const firebaseEventMap = new Map();
-
-        snapshot.docs.forEach((docSnap) => {
-          const data = docSnap.data();
-
-          // 예전 데이터에 저장돼 있던 id가 있으면 그걸 일정의 원래 ID로 사용
-          const logicalId = data.id || docSnap.id;
-
-          if (!data.date || deletedIds.has(logicalId)) return;
-
-          const event = {
-            ...data,
-            id: logicalId,
-          };
-
-          const existing = firebaseEventMap.get(logicalId);
-
-          // 같은 일정이 Firebase에 두 개 있다면
-          // 문서 ID와 일정 ID가 같은 최신 방식의 문서를 우선 사용
-          if (!existing || docSnap.id === logicalId) {
-            firebaseEventMap.set(logicalId, event);
-          }
-        });
-
-        const firebaseEvents = [...firebaseEventMap.values()];
-
-        const merged = INITIAL_EVENTS.filter(
-          (event) => !deletedIds.has(event.id)
-        );
-
-        firebaseEvents.forEach((firebaseEvent) => {
-          const index = merged.findIndex(
-            (event) => event.id === firebaseEvent.id
-          );
-
-          if (index !== -1) {
-            // Firebase에 수정된 일정이 있으면 Firebase 버전 우선
-            merged[index] = firebaseEvent;
-          } else {
-            // 사이트에서 새로 추가한 일정
-            merged.push(firebaseEvent);
-          }
-        });
-
-        setEvents(merged);
-      } catch (error) {
-        console.error("Firebase 일정 불러오기 오류:", error);
-
-        // Firebase 연결 실패 시에만 localStorage 백업 사용
-        const saved = localStorage.getItem("taehyun_events_final_v8");
-
-        if (saved) {
-          try {
-            setEvents(JSON.parse(saved));
-          } catch (e) {
-            setEvents(INITIAL_EVENTS);
-          }
-        } else {
-          setEvents(INITIAL_EVENTS);
-        }
-      } finally {
-        setEventsLoaded(true);
-      }
-    };
-
-    loadEventsFromFirebase();
-  }, []);
-
-  useEffect(() => {
-    if (!eventsLoaded) return;
-
-    localStorage.setItem(
-      "taehyun_events_final_v8",
-      JSON.stringify(events)
-    );
-  }, [events, eventsLoaded]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
