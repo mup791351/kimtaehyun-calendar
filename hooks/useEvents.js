@@ -13,10 +13,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
 
-export default function useEvents(initialEvents) {
-  const [events, setEvents] = useState(initialEvents);
+export default function useEvents() {
+  const [events, setEvents] = useState([]);
   const [eventsLoaded, setEventsLoaded] = useState(false);
 
+  // Firebase에서 일정 불러오기
   useEffect(() => {
     const loadEventsFromFirebase = async () => {
       try {
@@ -44,36 +45,21 @@ export default function useEvents(initialEvents) {
           }
         });
 
-        const merged = initialEvents.filter(
-          (event) => !deletedIds.has(event.id)
-        );
-
-        firebaseEventMap.forEach((firebaseEvent) => {
-          const index = merged.findIndex(
-            (event) => event.id === firebaseEvent.id
-          );
-
-          if (index !== -1) {
-            merged[index] = firebaseEvent;
-          } else {
-            merged.push(firebaseEvent);
-          }
-        });
-
-        setEvents(merged);
+        setEvents(Array.from(firebaseEventMap.values()));
       } catch (error) {
         console.error("Firebase 일정 불러오기 오류:", error);
 
+        // Firebase 오류 시 기존 캐시 사용
         const saved = localStorage.getItem("taehyun_events_final_v8");
 
         if (saved) {
           try {
             setEvents(JSON.parse(saved));
           } catch {
-            setEvents(initialEvents);
+            setEvents([]);
           }
         } else {
-          setEvents(initialEvents);
+          setEvents([]);
         }
       } finally {
         setEventsLoaded(true);
@@ -81,8 +67,9 @@ export default function useEvents(initialEvents) {
     };
 
     loadEventsFromFirebase();
-  }, [initialEvents]);
+  }, []);
 
+  // 일정 캐시 저장
   useEffect(() => {
     if (!eventsLoaded) return;
 
@@ -92,88 +79,90 @@ export default function useEvents(initialEvents) {
     );
   }, [events, eventsLoaded]);
 
-  
-const addEvent = async (newEvt) => {
-  try {
-    await setDoc(doc(db, "events", newEvt.id), newEvt);
+  // 일정 추가
+  const addEvent = async (newEvt) => {
+    try {
+      await setDoc(doc(db, "events", newEvt.id), newEvt);
 
-    setEvents((prev) => {
-      const exists = prev.some((e) => e.id === newEvt.id);
+      setEvents((prev) => {
+        const exists = prev.some((e) => e.id === newEvt.id);
 
-      if (exists) {
-        return prev.map((e) =>
-          e.id === newEvt.id ? newEvt : e
-        );
-      }
+        if (exists) {
+          return prev.map((e) =>
+            e.id === newEvt.id ? newEvt : e
+          );
+        }
 
-      return [newEvt, ...prev];
-    });
+        return [newEvt, ...prev];
+      });
 
-    return true;
-  } catch (error) {
-    console.error("Firebase 저장 오류:", error);
-    return false;
-  }
-};
-
-const updateEvent = async (updatedEvt) => {
-  try {
-    await setDoc(
-      doc(db, "events", updatedEvt.id),
-      updatedEvt
-    );
-
-    setEvents((prev) =>
-      prev.map((e) =>
-        e.id === updatedEvt.id ? updatedEvt : e
-      )
-    );
-
-    return true;
-  } catch (error) {
-    console.error("Firebase 수정 오류:", error);
-    return false;
-  }
-};
-
-const deleteEvent = async (eventId) => {
-  try {
-    const q = query(
-      collection(db, "events"),
-      where("id", "==", eventId)
-    );
-
-    const snapshot = await getDocs(q);
-
-    for (const document of snapshot.docs) {
-      if (document.id !== eventId) {
-        await deleteDoc(document.ref);
-      }
+      return true;
+    } catch (error) {
+      console.error("Firebase 저장 오류:", error);
+      return false;
     }
+  };
 
-    await setDoc(doc(db, "events", eventId), {
-      id: eventId,
-      deleted: true,
-      deletedAt: new Date().toISOString(),
-    });
+  // 일정 수정
+  const updateEvent = async (updatedEvt) => {
+    try {
+      await setDoc(
+        doc(db, "events", updatedEvt.id),
+        updatedEvt
+      );
 
-    setEvents((prev) =>
-      prev.filter((e) => e.id !== eventId)
-    );
+      setEvents((prev) =>
+        prev.map((e) =>
+          e.id === updatedEvt.id ? updatedEvt : e
+        )
+      );
 
-    return true;
-  } catch (error) {
-    console.error("Firebase 삭제 오류:", error);
-    return false;
-  }
-};
+      return true;
+    } catch (error) {
+      console.error("Firebase 수정 오류:", error);
+      return false;
+    }
+  };
+
+  // 일정 삭제
+  const deleteEvent = async (eventId) => {
+    try {
+      const q = query(
+        collection(db, "events"),
+        where("id", "==", eventId)
+      );
+
+      const snapshot = await getDocs(q);
+
+      for (const document of snapshot.docs) {
+        if (document.id !== eventId) {
+          await deleteDoc(document.ref);
+        }
+      }
+
+      await setDoc(doc(db, "events", eventId), {
+        id: eventId,
+        deleted: true,
+        deletedAt: new Date().toISOString(),
+      });
+
+      setEvents((prev) =>
+        prev.filter((e) => e.id !== eventId)
+      );
+
+      return true;
+    } catch (error) {
+      console.error("Firebase 삭제 오류:", error);
+      return false;
+    }
+  };
 
   return {
-  events,
-  setEvents,
-  eventsLoaded,
-  addEvent,
-  updateEvent,
-  deleteEvent,
-};
+    events,
+    setEvents,
+    eventsLoaded,
+    addEvent,
+    updateEvent,
+    deleteEvent,
+  };
 }
