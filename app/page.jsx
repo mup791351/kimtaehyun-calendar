@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { db } from "../lib/firebase";
+import { db, auth } from "../lib/firebase";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import {
   collection,
   getDocs,
@@ -1517,9 +1522,21 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
 }
 
 function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePin }) {
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-  const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const ADMIN_UID = "C5nNrpbLzye3VWuaTLr8Wy82Ydo2";
+
+const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [errorMsg, setErrorMsg] = useState("");
+const [loginLoading, setLoginLoading] = useState(false);
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    setIsAdminLoggedIn(user?.uid === ADMIN_UID);
+  });
+
+  return () => unsubscribe();
+}, []);
 
   const [editingId, setEditingId] = useState(null);
   const [date, setDate] = useState("2026-08-01");
@@ -1599,15 +1616,32 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
 
   if (!isOpen) return null;
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (password === "0103") {
-      setIsAdminLoggedIn(true);
-      setErrorMsg("");
-    } else {
-      setErrorMsg("비밀번호가 올바르지 않습니다.");
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  setErrorMsg("");
+  setLoginLoading(true);
+
+  try {
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    if (credential.user.uid !== ADMIN_UID) {
+      await signOut(auth);
+      setErrorMsg("관리자 권한이 없는 계정입니다.");
+      return;
     }
-  };
+
+    setIsAdminLoggedIn(true);
+    setPassword("");
+  } catch (error) {
+    setErrorMsg("이메일 또는 비밀번호를 확인해주세요.");
+  } finally {
+    setLoginLoading(false);
+  }
+};
 
   const handleStartEdit = (evt) => {
     setEditingId(evt.id);
@@ -1676,8 +1710,22 @@ function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpda
         {!isAdminLoggedIn ? (
           <div>
             <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">관리자 로그인</h3>
-            <p className="text-xs text-neutral-400 mb-4">관리자 비밀번호를 입력해주세요.</p>
+            <p className="text-xs text-neutral-400 mb-4">관리자 계정으로 로그인해주세요.</p>
             <form onSubmit={handleLogin} className="space-y-3">
+              <div>
+  <label className="block text-xs font-bold mb-1">
+    이메일
+  </label>
+  <input
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="관리자 이메일"
+    required
+    autoComplete="username"
+    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs dark:text-white"
+  />
+</div>
               <div>
                 <label className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1">비밀번호</label>
                 <input
