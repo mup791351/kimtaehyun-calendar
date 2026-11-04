@@ -1521,6 +1521,16 @@ function Calendar({ events, activeCategory, onCategoryChange, currentDate, setCu
   );
 }
 
+const getTodayDate = () => {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
 function AdminModal({ isOpen, onClose, events, onDeleteEvent, onAddEvent, onUpdateEvent, pinnedEventId, onTogglePin }) {
   const ADMIN_UID = "C5nNrpbLzye3VWuaTLr8Wy82Ydo2";
 
@@ -1539,7 +1549,7 @@ useEffect(() => {
 }, []);
 
   const [editingId, setEditingId] = useState(null);
-  const [date, setDate] = useState("2026-08-01");
+  const [date, setDate] = useState(getTodayDate);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("seoul");
   const [venueKey, setVenueKey] = useState("seoul");
@@ -1659,7 +1669,7 @@ useEffect(() => {
 
   const handleCancelEdit = () => {
     setEditingId(null);
-    setDate("2026-08-01");
+    setDate(getTodayDate());
     setTitle("");
     setCategory("seoul");
     setVenueKey("seoul");
@@ -2053,10 +2063,14 @@ useEffect(() => {
                         </button>
                         <button
                           onClick={() => {
-                            if (window.confirm("삭제하시겠습니까? 진짜진짜로???")) {
-                              onDeleteEvent(evt.id);
-                            }
-                          }}
+  const [, month, day] = evt.date.split("-");
+
+  const eventName = `${Number(month)}/${Number(day)} ${evt.title}`;
+
+  if (window.confirm(`${eventName} 삭제하시겠습니까?`)) {
+    onDeleteEvent(evt.id);
+  }
+}}
                           className="px-2.5 py-1 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700"
                         >
                           삭제
