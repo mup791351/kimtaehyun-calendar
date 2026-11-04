@@ -22,6 +22,7 @@ import { EVENT_PRESETS } from "../lib/eventPresets";
 import { CATEGORY_COLORS } from "../lib/categoryColors";
 import Calendar from "../components/Calendar";
 import VenueInfoCards from "../components/VenueInfoCards";
+import AdminModal from "../components/AdminModal";
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
