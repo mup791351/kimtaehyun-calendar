@@ -10,7 +10,7 @@ import AdminModal from "../components/AdminModal";
 
 import useEvents from "../hooks/useEvents";
 import usePinnedEvent from "../hooks/usePinnedEvent";
-import { INITIAL_EVENTS } from "../lib/initialEvents";
+
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
@@ -257,7 +257,7 @@ export default function App() {
   addEvent,
   updateEvent,
   deleteEvent,
-} = useEvents(INITIAL_EVENTS);
+} = useEvents();
 
   const {
   pinnedEventId,
