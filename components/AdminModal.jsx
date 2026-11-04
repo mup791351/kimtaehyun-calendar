@@ -338,21 +338,22 @@ const handleBackup = async () => {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="flex justify-end">
+            <div className="flex items-center justify-end gap-2 mt-6 mb-4">
+  <button
+    type="button"
+    onClick={handleBackup}
+    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-neutral-700 bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white transition-colors text-xs font-medium"
+  >
+    ↓ 백업
+  </button>
+
   <button
     type="button"
     onClick={handleLogout}
-    className="text-xs text-neutral-400 hover:text-red-500 transition-colors"
+    className="px-3 py-2 rounded-lg border border-neutral-700 text-neutral-400 hover:border-red-500 hover:text-red-400 transition-colors text-xs font-medium"
   >
     로그아웃
   </button>
-  <button
-  type="button"
-  onClick={handleBackup}
-  className="text-xs text-blue-400 hover:text-blue-300"
->
-  Firebase 일정 백업 ↓
-</button>
 </div>
             <div>
               <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-1">
