@@ -389,8 +389,10 @@ const handleTogglePin = async (eventId) => {
 };
 
   const sortedEvents = useMemo(() => {
-    return [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
-  }, [events]);
+  return [...(Array.isArray(events) ? events : [])].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+}, [events]);
 
   const filteredEvents = useMemo(() => {
     return sortedEvents.filter((e) => {
