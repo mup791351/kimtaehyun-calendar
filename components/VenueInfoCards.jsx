@@ -42,7 +42,7 @@ export default function VenueInfoCards() {
               href={VENUES.seoul.instagram}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
@@ -50,7 +50,7 @@ export default function VenueInfoCards() {
               href={VENUES.seoul.booking}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold text-center transition"
             >
               예매하기
             </a>
@@ -81,7 +81,7 @@ export default function VenueInfoCards() {
               href={VENUES.meta.instagram}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
@@ -89,7 +89,7 @@ export default function VenueInfoCards() {
               href={VENUES.meta.booking}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold text-center transition"
             >
               예매하기
             </a>
@@ -119,7 +119,7 @@ export default function VenueInfoCards() {
               href={VENUES.samgak.instagram}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-neutral-700 hover:bg-neutral-600 text-white rounded-xl text-xs font-bold text-center transition"
             >
               인스타 보기
             </a>
@@ -127,7 +127,7 @@ export default function VenueInfoCards() {
               href={VENUES.samgak.booking}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 min-h-11 inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold text-center transition"
+              className="flex-1 py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold text-center transition"
             >
               예매하기
             </a>
@@ -154,16 +154,19 @@ export default function VenueInfoCards() {
             </div>
           </div>
           <p className="text-[11px] text-neutral-500 dark:text-neutral-400">김태현, 이제규, 문성준의 대한민국 최고의 팟캐스트.</p>
-          <div className="pt-1">
-            <a
-              href="https://www.youtube.com/@americanjoke0"
-              target="_blank"
-              rel="noreferrer"
-              className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition"
-            >
-              <Youtube className="w-full min-h-11 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition" /> 보러가기
-            </a>
-          </div>
+          
+<div className="pt-1">
+  <a
+    href="https://www.youtube.com/@americanjoke0"
+    target="_blank"
+    rel="noreferrer"
+    className="w-full py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition"
+  >
+    <Youtube className="w-4 h-4 shrink-0" />
+    보러가기
+  </a>
+</div>
+
         </div>
       </div>
     </div>

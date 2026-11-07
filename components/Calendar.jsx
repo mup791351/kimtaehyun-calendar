@@ -104,28 +104,32 @@ function EventModal({ isOpen, onClose, dayString, events }) {
                     )}
                   </div>
 
-                  <div className="flex gap-1.5 pt-1.5 border-t border-neutral-200 dark:border-neutral-700/60">
-                    {(evt.booking || venueInfo?.booking) && (
-                      <a
-                        href={evt.booking || venueInfo.booking}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex-1 py-2 bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white rounded-xl text-[11px] font-bold text-center block"
-                      >
-                        🔗 예매하기
-                      </a>
-                    )}
-                    {venueInfo && venueInfo.instagram && (
-                      <a
-                        href={venueInfo.instagram}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="py-2 px-3 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 rounded-xl text-[11px] font-bold text-center block"
-                      >
-                        📷 인스타
-                      </a>
-                    )}
-                  </div>
+                  
+<div className="flex gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-700/60">
+  {/* 왼쪽: 인스타그램 */}
+  {venueInfo?.instagram && (
+    <a
+      href={venueInfo.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex-1 min-w-0 min-h-11 inline-flex items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-bold text-neutral-800 transition-colors hover:bg-neutral-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700"
+    >
+      📷 인스타
+    </a>
+  )}
+
+  {/* 오른쪽: 예매하기 */}
+  {(evt.booking || venueInfo?.booking) && (
+    <a
+      href={evt.booking || venueInfo.booking}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex-1 min-w-0 min-h-11 inline-flex items-center justify-center gap-1.5 rounded-lg bg-red-600 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-red-500"
+    >
+      🔗 예매하기
+    </a>
+  )}
+</div>
                 </div>
               );
             })}
@@ -340,11 +344,50 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
           })}
         </div>
 
-        {Object.keys(eventsByDay).length === 0 && (
-          <div className="py-6 text-center text-neutral-400">
-            <p className="text-xs font-bold text-neutral-700 dark:text-neutral-300">이 달에 등록된 일정이 없습니다.</p>
-          </div>
-        )}
+        
+{Object.keys(eventsByDay).length === 0 && (
+  <div className="mt-4 rounded-xl border border-neutral-800 bg-[#191919] p-4">
+    <div className="flex items-start gap-3">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-neutral-800 text-lg">
+        📅
+      </div>
+
+      <div>
+        <p className="text-sm font-semibold text-white">
+          아직 등록된 공연 일정이 없어요
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-neutral-400">
+          새로운 공연 일정은 확정되는 대로 업데이트됩니다.
+        </p>
+      </div>
+    </div>
+
+    <div className="mt-4 border-t border-neutral-800 pt-4">
+      <p className="text-sm font-semibold text-neutral-200">
+  공연이 없는 날엔, 미국식농담!{" "}
+<img
+  src="https://flagcdn.com/w40/us.png"
+  alt="미국 국기"
+  className="inline-block w-5 h-auto align-middle mx-1"
+/>
+</p>
+
+      <p className="mt-1 text-xs text-neutral-400">
+        유튜브 채널에서 콘텐츠를 만나보세요.
+      </p>
+
+      <a
+        href="https://www.youtube.com/@americanjoke0"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-red-500"
+      >
+        ▶ 미국식농담 보러가기
+      </a>
+    </div>
+  </div>
+)}
+
 
         <div className="mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-700">
           <p className="text-[10px] font-bold text-neutral-400 text-center uppercase tracking-wider mb-2">
