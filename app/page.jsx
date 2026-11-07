@@ -183,14 +183,17 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
   </div>
 
   {/* Contact & Social */}
-  <div className="mt-2 sm:mt-4 flex flex-col items-center gap-2 sm:gap-4 px-3">
+  <div className="mt-5 sm:mt-6 flex flex-col items-center gap-3 sm:gap-4 px-3">
 
-    <a
-      href="mailto:taehyun@metacomedy.net"
-      className="text-xs text-neutral-400 hover:text-white transition"
-    >
-      taehyun@metacomedy.net
-    </a>
+    
+<a
+  href="mailto:taehyun@metacomedy.net"
+  className="inline-flex items-center gap-1.5 rounded-full bg-neutral-800/70 px-3 py-1.5 text-[11px] text-neutral-300 transition-colors hover:bg-neutral-700 hover:text-white"
+>
+  <MailIcon className="h-3.5 w-3.5 text-neutral-400" />
+  taehyun@metacomedy.net
+</a>
+
 
     <div className="flex items-center justify-center gap-6">
       <a
@@ -238,7 +241,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
               {nextShow.date.split('-')[1]}월 {nextShow.date.split('-')[2]}일 {nextShow.startTime}
             </h2>
             <p className="text-neutral-600 dark:text-neutral-300 text-xs font-semibold flex items-center gap-1 flex-wrap">
-              📍 {(nextShow.venueKey && VENUES[nextShow.venueKey]?.name) || nextShow.customVenue || "온라인"} — <span className="text-neutral-900 dark:text-white font-bold">{nextShow.title}</span>
+              📍 {(nextShow.venueKey && VENUES[nextShow.venueKey]?.name) || nextShow.customVenue || "온라인"} <span className="text-neutral-900 dark:text-white font-bold">{nextShow.title}</span>
             </p>
           </div>
 
