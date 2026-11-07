@@ -143,63 +143,81 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
         </button>
 
 
-        {/* Profile Image - Slim horizontal layout with 4-side gradient fade */}
-        <div className="w-full max-w-xs mb-2 mt-0 px-4">
-          <div
-            className="w-full h-32 sm:h-40 relative overflow-hidden flex items-center justify-center"
-            style={{
-              maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-              maskComposite: 'intersect',
-              WebkitMaskComposite: 'destination-in'
-            }}
-          >
-            <img
-              src={profileImage}
-              alt="코미디언 김태현"
-              className="w-full h-full object-cover object-top"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/image.png";
-              }}
-            />
-          </div>
-        </div>
+        
 
-        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
-          김태현
-        </h1>
+{/* Artist Hero */}
+<div className="relative w-full max-w-2xl mx-auto -mt-10">
 
-        <p className="mt-1 text-sm font-medium text-neutral-500 dark:text-neutral-400">
-          Stand-up Comedian
-        </p>
+  {/* Main Visual */}
+  <div className="relative h-[310px] sm:h-[470px] overflow-hidden">
 
-        <div className="mt-2.5 flex items-center gap-1.5 text-xs font-semibold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-3.5 py-1.5 rounded-full">
-          <MailIcon className="w-3.5 h-3.5" />
-          <a href="mailto:taehyun@metacomedy.net" className="hover:underline">taehyun@metacomedy.net</a>
-        </div>
+    {/* Subtle Red Glow */}
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,rgba(130,20,30,0.22),transparent_65%)]" />
 
-        <div className="flex gap-2.5 mt-4">
-          <a
-            href="https://www.instagram.com/choo_sen?igsh=MWRsbXQydXFncmI2"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-neutral-700 bg-[#151515] px-4 py-2 shadow-sm active:scale-95 text-neutral-200 text-xs font-semibold"
-          >
-            <Instagram className="w-3.5 h-3.5 text-pink-500" />
-            <span>Instagram</span>
-          </a>
+    {/* Artist Image */}
+    <img
+      src="/taehyun-profile.png"
+      alt="스탠드업 코미디언 김태현"
+      className="absolute bottom-0 left-1/2 h-[85%] sm:h-[80%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
+      onError={(e) => {
+        e.currentTarget.onerror = null;
+        e.currentTarget.src = "/image.png";
+      }}
+    />
 
-          <a
-            href="https://www.youtube.com/channel/UC67dXWw4xqqQQDzg5bWyObA?si=kB5Xmp2MeeuVJHIL"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-full border border-neutral-700 bg-[#151515] px-4 py-2 shadow-sm active:scale-95 text-neutral-200 text-xs font-semibold"
-          >
-            <Youtube className="w-3.5 h-3.5 text-red-500" />
-            <span>YouTube</span>
-          </a>
-        </div>
+    {/* Bottom Fade */}
+    
+
+    {/* Name Overlay */}
+    <div className="absolute bottom-0 left-0 right-0 z-10 text-center px-4">
+      <p className="text-[9px] sm:text-xs tracking-[0.3em] font-medium text-neutral-300 uppercase mb-2 sm:mb-3">
+        STAND-UP COMEDIAN
+      </p>
+
+      <h1 className="text-[42px] sm:text-[66px] font-black tracking-[-0.06em] leading-none text-white">
+        김태현
+      </h1>
+
+      <div className="w-10 h-[2px] bg-red-600 mx-auto mt-5" />
+    </div>
+  </div>
+
+  {/* Contact & Social */}
+  <div className="mt-2 sm:mt-4 flex flex-col items-center gap-2 sm:gap-4 px-3">
+
+    <a
+      href="mailto:taehyun@metacomedy.net"
+      className="text-xs text-neutral-400 hover:text-white transition"
+    >
+      taehyun@metacomedy.net
+    </a>
+
+    <div className="flex items-center justify-center gap-6">
+      <a
+        href="https://www.instagram.com/choo_sen?igsh=MWRsbXQydXFncmI2"
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center gap-2 text-xs text-neutral-300 hover:text-white transition"
+      >
+        <Instagram className="w-4 h-4" />
+        Instagram
+      </a>
+
+      <span className="h-4 w-px bg-neutral-700" />
+
+      <a
+        href="https://www.youtube.com/channel/UC67dXWw4xqqQQDzg5bWyObA?si=kB5Xmp2MeeuVJHIL"
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center gap-2 text-xs text-neutral-300 hover:text-white transition"
+      >
+        <Youtube className="w-4 h-4" />
+        YouTube
+      </a>
+    </div>
+  </div>
+</div>
+
       </header>
 
       {nextShow && (
