@@ -11,6 +11,8 @@ import VenueInfoCards from "../components/VenueInfoCards";
 import useEvents from "../hooks/useEvents";
 import usePinnedEvent from "../hooks/usePinnedEvent";
 
+import Snowfall from "../components/Snowfall";
+
 
 // SVG Icon Components
 const Instagram = ({ className = "w-4 h-4" }) => (
@@ -123,6 +125,9 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
   }, []);
   return (
     <>
+    <Snowfall />
+     <div className="snow-ground" />
+
       <header className="flex flex-col items-center text-center pt-0 relative">
 
         <button
@@ -156,7 +161,7 @@ function Header({ nextShow, onShare, darkMode, setDarkMode, profileImage }) {
 
     {/* Artist Image */}
     <img
-      src="/taehyun-profile.png"
+      src="/taehyun-christmas.png"
       alt="스탠드업 코미디언 김태현"
       className="absolute bottom-0 left-1/2 h-[85%] sm:h-[80%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
       onError={(e) => {
