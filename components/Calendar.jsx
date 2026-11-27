@@ -25,9 +25,9 @@ function Legend({ catKey, cat, isActive, onClick }) {
   return (
     <button
       onClick={() => onClick(catKey)}
-      className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${isActive
-        ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105`
-        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 active:bg-neutral-200 dark:active:bg-neutral-700"
+      className={`flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold transition-colors shrink-0 ${isActive
+        ? `${cat.color} ${catKey === 'solo' ? 'text-neutral-950 ring-4 ring-amber-300' : 'text-white'} `
+        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 active:bg-neutral-200 dark:active:bg-neutral-700"
         }`}
     >
       {catKey === "etc" ? (
@@ -38,9 +38,9 @@ function Legend({ catKey, cat, isActive, onClick }) {
         <img
           src={cat.icon}
           alt=""
-          className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${catKey === "solo"
+          className={`w-5 h-5 shrink-0 object-contain ${catKey === "solo"
             ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-            : ""
+            : catKey === "meta" ? "invert dark:invert-0" : ""
             }`}
         />
       )}
@@ -225,8 +225,9 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
 
   return (
     <>
-      <section id="calendar" className="rounded-2xl bg-[#111111] p-3 sm:p-5 shadow-sm border border-neutral-800 my-3 overflow-hidden">
-        <div className="flex items-center justify-between mb-4">
+      <section className="w-full text-[var(--site-text)]">
+        <h2 className="mb-5 text-2xl font-black tracking-tight">공연 일정</h2>
+        <div className="flex items-center justify-between border-y border-[var(--site-border)] py-3 mb-2">
           <button
   onClick={handlePrevMonth}
   disabled={
@@ -234,18 +235,18 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
     (year === new Date().getFullYear() &&
       month <= new Date().getMonth())
   }
-  className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800 disabled:opacity-20 disabled:cursor-not-allowed"
+  className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--site-text)] font-semibold text-2xl hover:bg-neutral-200 dark:hover:bg-neutral-800 disabled:opacity-20 disabled:cursor-not-allowed"
 >
   ‹
 </button>
           <div className="text-center">
-            <h2 className="text-base sm:text-xl font-black text-white">
+            <h2 className="text-xl font-bold text-[var(--site-text)]">
               {month + 1}월
             </h2>
           </div>
           <button
             onClick={handleNextMonth}
-            className="w-7 h-7 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 font-black text-sm active:bg-neutral-800"
+            className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--site-text)] font-semibold text-2xl hover:bg-neutral-200 dark:hover:bg-neutral-800"
           >
             ›
           </button>
@@ -253,7 +254,7 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
 
         <div className="grid grid-cols-7 mb-1.5 text-center">
           {["월", "화", "수", "목", "금", "토", "일"].map((day, index) => (
-            <div key={day} className={`font-extrabold text-[15px] py-1 ${index === 5 ? "text-blue-500" : index === 6 ? "text-red-500" : "text-neutral-400"}`}>
+            <div key={day} className={`font-semibold text-xs py-2 ${index === 5 ? "text-blue-500" : index === 6 ? "text-red-500" : "text-[var(--site-muted)]"}`}>
               {day}
             </div>
           ))}
@@ -261,7 +262,7 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
 
         <div className="grid grid-cols-7 gap-1">
           {blanks.map((_, i) => (
-            <div key={`blank-${i}`} className="h-16 sm:h-20 opacity-0" />
+            <div key={`blank-${i}`} className="h-[clamp(44px,6.5dvh,68px)] opacity-0" />
           ))}
 
           {days.map((day) => {
@@ -282,23 +283,24 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
               <div key={day} className="relative">
                 <button
                   onClick={() => handleDayClick(day)}
-                  className={`w-full h-16 sm:h-20 rounded-xl p-1 flex flex-col justify-between transition-all text-left border overflow-hidden ${hasEvents
-                    ? "bg-[#191919] border-neutral-800 active:border-red-500 shadow-sm"
-                    : "border-transparent active:bg-[#151515]"
-                    } ${isToday ? "ring-2 ring-black dark:ring-white bg-orange-50/60 dark:bg-orange-950/30" : ""}`}
+                  className={`w-full h-[clamp(44px,6.5dvh,68px)] rounded-lg p-1 flex flex-col gap-0.5 transition-all text-left border overflow-hidden ${hasEvents
+                    ? "bg-[#ebebeb] dark:bg-[#202020] border-[var(--site-border)] hover:border-red-500"
+                    : "bg-transparent border-[var(--site-border)] hover:bg-[var(--site-card)]"
+                    } ${isToday ? "!border-red-500 !bg-red-50 dark:!bg-red-950/30" : ""}`}
                 >
-                  <div className="flex flex-col w-full">
-                    <span className={`font-black text-xs leading-none ${isToday ? "text-red-500 font-extrabold" : isPast ? "text-neutral-600 font-normal" : hasEvents ? "text-white" : "text-neutral-500"}`}>
+                  <div className="flex items-center justify-between gap-px w-full shrink-0">
+                    <span className={`text-xs leading-none ${isToday ? "text-red-500 font-bold" : isPast ? "text-[var(--site-muted)] font-normal" : "text-[var(--site-text)] font-medium"}`}>
                       {day}
                     </span>
                     {isToday && (
-                      <span className="text-[7px] font-black text-red-400 bg-red-950 px-1 py-0.5 rounded font-sans tracking-tighter w-max mt-0.5 scale-90 origin-left">
-                        TODAY
+                      <span className="text-[6px] sm:text-[8px] leading-none font-bold text-red-600 dark:text-red-400 tracking-tighter shrink-0">
+                        <span className="hidden min-[360px]:inline">TODAY</span>
+                        <span className="min-[360px]:hidden" aria-label="오늘">●</span>
                       </span>
                     )}
                   </div>
 
-                  <div className="flex flex-wrap justify-center gap-0 mb-0.5">
+                  <div className="flex flex-nowrap items-center justify-center gap-0.5 flex-1 min-h-0 w-full">
                     {uniqueDayEvents.map((evt, index) => {
 
                       const iconMap = {
@@ -316,18 +318,23 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
                         <span
                           key={index}
                           title={evt.title}
-                          className="w-5 h-5 flex-shrink-0 flex items-center justify-center"
+                          className={`min-w-0 flex items-center justify-center h-full max-h-10 flex-1 max-w-10 ${isPast ? "opacity-60" : ""}`}
                         >
                           {icon.startsWith("/") ? (
                             <img
                               src={icon}
                               alt=""
-                              className={`w-full h-full object-contain ${evt.category === "solo"
-                                ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
-                                : evt.category === "meta"
-                                  ? "scale-125"
-                                  : ""
-                                }`}
+                              className={`w-full h-full object-contain ${
+  evt.category === "solo"
+    ? "animate-pulse drop-shadow-[0_0_5px_rgba(250,204,21,0.9)]"
+    : evt.category === "meta"
+      ? "invert dark:invert-0 scale-[1.4]"
+      : evt.category === "seoul"
+        ? "scale-[1.15]"
+        : evt.category === "samgak"
+          ? "scale-[1]"
+          : ""
+}`}
                             />
                           ) : (
                             <span className="text-xs leading-none">
@@ -346,14 +353,14 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
 
         
 {Object.keys(eventsByDay).length === 0 && (
-  <div className="mt-4 rounded-xl border border-neutral-800 bg-[#191919] p-4">
+  <div className="mt-3 rounded-xl border border-[var(--site-border)] bg-[var(--site-card)] p-3">
     <div className="flex items-start gap-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-neutral-800 text-lg">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-800 text-lg">
         📅
       </div>
 
       <div>
-        <p className="text-sm font-semibold text-white">
+        <p className="text-sm font-semibold text-[var(--site-text)]">
           아직 등록된 공연 일정이 없어요
         </p>
         <p className="mt-1 text-xs leading-relaxed text-neutral-400">
@@ -362,8 +369,8 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
       </div>
     </div>
 
-    <div className="mt-4 border-t border-neutral-800 pt-4">
-      <p className="text-sm font-semibold text-neutral-200">
+    <div className="mt-2 border-t border-[var(--site-border)] pt-2">
+      <p className="text-sm font-semibold text-[var(--site-text)]">
   공연이 없는 날엔, 미국식농담!{" "}
 <img
   src="https://flagcdn.com/w40/us.png"
@@ -389,19 +396,16 @@ export default function Calendar({ events, activeCategory, onCategoryChange, cur
 )}
 
 
-        <div className="mt-5 pt-4 border-t border-neutral-100 dark:border-neutral-700">
-          <p className="text-[10px] font-bold text-neutral-400 text-center uppercase tracking-wider mb-2">
-            카테고리 필터
-          </p>
-          <div className="flex gap-1.5 overflow-x-auto py-2 scrollbar-none justify-start sm:justify-center">
+        <div className="mt-4 pt-3 border-t border-[var(--site-border)]">
+          <div className="flex flex-wrap gap-2 py-1 justify-start">
             <button
               onClick={() => onCategoryChange("all")}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${activeCategory === "all"
-                ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white shadow-sm ring-2 ring-offset-1 ring-neutral-300 dark:ring-neutral-600 scale-105"
-                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400"
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors shrink-0 ${activeCategory === "all"
+                ? "bg-neutral-950 dark:bg-white dark:text-neutral-900 text-white "
+                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200"
                 }`}
             >
-              전체 보기
+              전체
             </button>
             {Object.entries(CATEGORY_COLORS).map(([key, cat]) => (
               <Legend
